@@ -1,2 +1,0 @@
-#!/bin/sh
-rsync  --archive --compress --force --delete --progress --exclude '.git' --exclude publish . kyle@kemitchell.com:/var/www/oss.kemitchell.com/
