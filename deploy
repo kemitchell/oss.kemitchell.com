@@ -1,0 +1,3 @@
+#!/bin/sh
+SITE=oss.kemitchell.com
+rsync --quiet -avr --exclude .git --delete index.html $SITE:/var/www/$SITE
