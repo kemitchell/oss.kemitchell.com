@@ -16,4 +16,4 @@ cp $index "$tmp"
 sed --in-place "s/UPDATED/$date_display/" "$tmp"
 sed --in-place "s/DATETIME/$date_iso/" "$tmp"
 
-scp "$tmp" "$SITE:/var/www/$SITE/$index"
+scp -q "$tmp" "$SITE:/var/www/$SITE/$index"
