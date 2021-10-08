@@ -1,3 +1,20 @@
 #!/bin/sh
+set -x
+set -e
 SITE=oss.kemitchell.com
-scp index.html "$SITE:/var/www/$SITE/index.html"
+
+tmp="$(mktemp)"
+remove_tmp () {
+  rm -f "$tmp"
+}
+trap remove_tmp EXIT
+
+index=index.html
+date_iso="$(git log -1 --format=%ad --date=iso-strict -- $index)"
+date_display="$(git log -1 --format=%ad "--date=format:%B %-d, %Y" -- $index)"
+
+cp $index "$tmp"
+sed --in-place "s/UPDATED/$date_display/" "$tmp"
+sed --in-place "s/DATETIME/$date_iso/" "$tmp"
+
+scp "$tmp" "$SITE:/var/www/$SITE/$index"
