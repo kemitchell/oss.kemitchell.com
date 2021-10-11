@@ -15,5 +15,6 @@ date_display="$(git log -1 --format=%ad "--date=format:%B %-d, %Y" -- $index)"
 cp $index "$tmp"
 sed --in-place "s/UPDATED/$date_display/" "$tmp"
 sed --in-place "s/DATETIME/$date_iso/" "$tmp"
+tidy -modify -indent --indent-spaces 2 -quiet --tidy-mark no --wrap 0 "$tmp"
 
 scp -q "$tmp" "$SITE:/var/www/$SITE/$index"

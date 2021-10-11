@@ -1,436 +1,390 @@
-<!doctype html>
-<html lang=en>
-  <head>
-    <meta charset=utf-8>
-    <title>Open Source: Theory of Operation</title>
-    <meta name=viewport content="width=device-width, initial-scale=1">
-    <link rel=stylesheet href=https://readable.kemitchell.com/all.css>
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Open Source: Theory of Operation">
-    <meta name="twitter:description" content="introduction to open source licensing for business users">
-    <meta name="twitter:image" content="https://writing.kemitchell.com/placeholder-on-white.png">
-    <meta name="twitter:creator" content="@kemitchell">
-    <!-- OpenGraph -->
-    <meta name="og:type" content="website">
-    <meta name="og:title" content="Open Source: Theory of Operation">
-    <meta name="og:description" content="introduction to open source licensing for business users">
-    <meta name="og:image" content="https://writing.kemitchell.com/placeholder-on-white.png">
-  </head>
-  <body>
-    <header role=banner>
-      <h1>Open Source:<br>Theory of Operation</h1>
-      <p>Last Updated <time datetime="DATETIME">UPDATED</time></p>
-    </header>
-
-    <nav role=navigation>
-      <ol>
-        <li><a href=#in-brief>In Brief</a></li>
-
-        <li>
-          <a href=#operating-environment>Operating Environment</a>
-          <ol>
-            <li><a href=#defaults-and-overrides>Defaults and Overrides</a></li>
-            <li><a href=#intellectual-property-law>Intellectual Property Law</a></li>
-            <li><a href=#contract-law>Contract Law</a></li>
-            <li><a href=#real-world-risk>Real-World Risk</a></li>
-          </ol>
-        </li>
-
-        <li>
-          <a href=#implementations>Implementations</a>
-          <ol>
-            <li><a href=#permissive-licenses>Permissive Licenses</a></li>
-            <li><a href=#copyleft-licenses>Copyleft Licenses</a></li>
-            <li><a href=#applying-licenses-to-code>Applying Licenses to Code</a></li>
-            <li><a href=#contribution-management>Contribution Management</a></li>
-          </ol>
-        </li>
-
-        <li>
-          <a href=#additional-resources>Additional Resources</a>
-          <ol>
-            <li><a href=#important-institutions>Important Institutions</a></li>
-            <li><a href=#further-reading>Further Reading</a></li>
-          </ol>
-        </li>
-      </ol>
-    </nav>
-
-    <main role=main>
-      <p>This is a short, practical guide to open source software for programmers at work. If you code on the job and wonder how open source works, why you can use some kinds and not others, or what you have to do to get away with it, this guide’s for you. Feedback is welcome at <a href=https://github.com/kemitchell/oss.kemitchell.com>github.com/kemitchell/oss.kemitchell.com</a>.</p>
-
-      <p><strong>Spoiler Alert</strong>: If your company or contract client has an open source policy or approval process, do what their policy says. Read the policy—I’m serious—and follow it. If you’re new to this stuff, you will probably feel better equipped to understand, talk about, and perhaps improve that policy after reading through this guide. The policy and the people who administer it might even start to make sense.</p>
-
-      <p>Either way, know going in that this guide abstracts away some details, exceptions, and edge cases to make the whole package more accessible. Fortunately, good sources of detail on open source licensing and compliance are easy to find. Almost all the good stuff is on the Internet. Buried in mounds of ill-considered histrionics, granted. But you can learn to tell the difference.</p>
-
-      <p>Do <em>not</em> extrapolate from the breezy generalizations you find here to specific, business-critical decisions without further research. In other words, <a href=https://notlegaladvice.law>don’t make this guide the last thing you read before taking a big decision</a>. Educate yourself further, look at what others have done and got away with, and if at all possible, talk to your company’s lawyers and compliance pros. That should be easier once you’ve read this guide.</p>
-
-      <h2 id=in-brief>In Brief</h2>
-
-      <ol>
-
-        <li><p>Open source software licenses override legal defaults to make giving away and using software safe and easy.</p></li>
-
-        <li><p>To enjoy that convenience as a user, you have to follow a few license requirements, like attributing open source work to those who licensed it.</p></li>
-
-        <li><p>Copyleft licenses have more requirements. Usually you have to give users access to source code and use similar license terms for work that builds on the copyleft code.</p></li>
-
-        <li><p>Some open source licenses take permission away from anyone who uses patents to sue other users or contributors.</p></li>
-
-        <li><p>Contributor license agreements, assignments, and developer certificates create records showing that legal defaults get overridden by all those who have intellectual property in a project.</p></li>
-
-      </ol>
-
-      <h2 id=operating-environment>Operating Environment</h2>
-
-      <p>Under current law, software never starts out as open source. People who own rights in software have to turn it into open source software with legal tools called <dfn>open source licenses</dfn>. Open source licenses override legal defaults that fit the traditional, proprietary model of software developed behind closed doors and licensed to customers for a fee under negotiated contracts. Open source licenses replace those defaults with written terms that make publishing, distributing, and using open source software relatively simple and low-risk.</p>
-
-      <p>When open source licenses work correctly, users and distributors, like your company, needn’t worry about the proprietary-style legal defaults. But you can’t understand how open source licenses work, or decide whether a license overrides all the defaults your company should worry about, if you don’t understand what the default rules for software are in the first place.</p>
-
-      <h3 id=defaults-and-overrides>Defaults and Overrides</h3>
-
-      <p>In summary, the most important legal defaults and open source overrides are:</p>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Law</th>
-            <th>Area</th>
-            <th>Legal Default</th>
-            <th>Open Source Override</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td><a href=#intellectual-property-law>IP</a></td>
-            <td><a href=#copyright-law>Copyright</a></td>
-            <td>Owners can sue for copying work.</td>
-            <td>Owners license to make copies.</td>
-          </tr>
-
-          <tr>
-            <td><a href=#intellectual-property-law>IP</a></td>
-            <td><a href=#copyright-law>Copyright</a></td>
-            <td>Owners can sue for distributing work.</td>
-            <td>Owners license to distribute.</td>
-          </tr>
-
-          <tr>
-            <td><a href=#intellectual-property-law>IP</a></td>
-            <td><a href=#copyright-law>Copyright</a></td>
-            <td>Owners can sue for changing work.</td>
-            <td>Owners license to make changes.</td>
-          </tr>
-
-          <tr>
-            <td><a href=#intellectual-property-law>IP</a></td>
-            <td><a href=#patent>Patent</a></td>
-            <td>Owners can sue for using inventions.</td>
-            <td>Owners license to use.</td>
-          </tr>
-
-          <tr>
-            <td><a href=#intellectual-property-law>IP</a></td>
-            <td><a href=#patent>Patent</a></td>
-            <td>Owners can sue for making inventions.</td>
-            <td>Owners license to make.</td>
-          </tr>
-
-          <tr>
-            <td><a href=#intellectual-property-law>IP</a></td>
-            <td><a href=#patent>Patent</a></td>
-            <td>Owners can sue for selling inventions.</td>
-            <td>Owners license to sell.</td>
-          </tr>
-
-          <tr>
-            <td><a href=#intellectual-property-law>IP</a></td>
-            <td><a href=#patent>Patent</a></td>
-            <td>Owners can sue for importing inventions.</td>
-            <td>Owners license to import.</td>
-          </tr>
-
-          <tr>
-            <td><a href=#contract-law>Contract</a></td>
-            <td><a href=#warranties>Warranties</a></td>
-            <td>Sellers guarantee merchantability.</td>
-            <td>Owners disclaim merchantability.</td>
-          </tr>
-
-          <tr>
-            <td><a href=#contract-law>Contract</a></td>
-            <td><a href=#warranties>Warranties</a></td>
-            <td>Sellers guarantee fitness for purpose.</td>
-            <td>Owners disclaim fitness for purpose.</td>
-          </tr>
-
-          <tr>
-            <td><a href=#contract-law>Contract</a></td>
-            <td><a href=#warranties>Warranties</a></td>
-            <td>Sellers guarantee noninfringement.</td>
-            <td>Owners disclaim noninfringement.</td>
-          </tr>
-
-          <tr>
-            <td><a href=#contract-law>Contract</a></td>
-            <td><a href=#liability>Liability</a></td>
-            <td>Buyers can sue for foreseeable damages.</td>
-            <td>Terms limit liability to zero.</td>
-          </tr>
-
-          <tr>
-            <td><a href=#contract-law>Contract</a></td>
-            <td><a href=#liability>Liability</a></td>
-            <td>Buyers can sue in contract, tort, &amp;c.</td>
-            <td>Terms exclude all claims.</td>
-          </tr>
-
-          <tr>
-            <td><a href=#contract-law>Contract</a></td>
-            <td><a href=#formation>Formation</a></td>
-            <td>Each contributor licenses their part.</td>
-            <td>Same terms, from all contributors.</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p>Not all open source licenses override every default listed here. Some open source licenses do a better job of overriding specific defaults than others. Many open source licenses address more legal rules, either to override defaults or make clarifications.</p>
-
-      <h3 id=intellectual-property-law>Intellectual Property Law</h3>
-
-      <p>Intellectual property laws give monopolies over many kinds of techniques, ideas, symbols, and products of thinking work. The strongest core idea behind these laws—the primary <dfn>policy</dfn> behind them—is to reward those risking and investing with the right to control the benefits of their results, so they can charge others to use them, earning a just reward.</p>
-
-      <p>Using intellectual property without permission is <dfn>infringement</dfn>. The law allows intellectual property owners to sue infringers to get court orders to stop infringement—<dfn>injunctions</dfn>—pay money to the owners—<dfn>damages</dfn>—or both. Owners can sell permission, in the form of <dfn>licenses</dfn>, to do what would otherwise count as infringement. Owners can also sell or assign intellectual property to others, making them the new owners.</p>
-
-      <p>The key intellectual property laws for open source are copyright and patent laws.</p>
-
-      <h4 id=copyright-law>Copyright Law</h4>
-
-      <p>Copyright law rewards authors of creative works with rights to stop others from making copies of their work or using it as a starting point for new work. The archetype of a copyright owner is the writer who sells a publisher exclusive license to print and sell their novel as a book.</p>
-
-      <p>If code, documentation, configuration, or data—almost anything you can store in files—is even a tiny bit creative, copyright applies automatically, from the moment it’s typed out. There’s no requirement to file with the government or pay any fees, at least until you want to sue for infringement. Since copyright damages for even small infringement can be very large, and making sure a piece of work utterly lacks legal “creativity” is hard and takes legal expertise, most savvy companies and savvy open source projects treat every bit of software and documentation they receive as though someone owns copyright in it.</p>
-
-      <p>Lawyers read nearly all common open source licenses to grant everyone a copyright license. By default, nobody has a license, and the copyright owner can sue them if they infringe. Giving everyone a license—a <dfn>public license</dfn>—overrides the default, so the owner can’t sue anyone, so long as they follow all the rules of the license.</p>
-
-      <p>Professionally drafted license agreements make clear when a license is a copyright license by using the word “copyright”. For example, the copyright license in <a href=https://www.apache.org/licenses/LICENSE-2.0.html#copyright>section 2 of the Apache License, Version 2.0</a> reads:</p>
-
-      <blockquote><p><em>Grant of Copyright License</em>. Subject to the terms and conditions of this License, each Contributor hereby grants to You a…copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.</p></blockquote>
-
-      <p>This is the style most professional licensing lawyers use and expect. Actually, it’s pretty modern by lawyer standards. It’s the style of better proprietary software licenses.</p>
-
-      <p>Many open source licenses use a less structured style. These licenses give “permission” or say that users “may” do things with the software that would otherwise infringe copyright, without saying “copyright”. For example, the first paragraph of <a href=https://spdx.org/licenses/MIT>The MIT License</a> begins:</p>
-
-      <blockquote><p>Permission is hereby granted…to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software…</p></blockquote>
-
-      <p>Without this language, copying, modifying, publishing, or distributing would infringe any copyrighted work in the software. Using and selling, on the other hand, might infringe patents.</p>
-
-      <h4 id=patent>Patent</h4>
-
-      <p>Patent law rewards inventors who publish their findings through the government with twenty-year rights to stop others from making, using, selling, or importing goods and services that implement them. The archetype of a patent owner invents a better mousetrap in their garage, secures a patent, sues a company that makes their trap without permission, and settles the lawsuit for a big check and a royalty.</p>
-
-      <p>Teaching a computer to do something useful, instead of a person or some other machine, does not, in itself, entitle the programmer to a patent. But new inventions that happen to be implemented in software, and new inventions in the art of making software, can be patented. Algorithms, data structures, protocols, and other methods of achieving useful results with software have all been covered by patents. It used to be easier to patent ideas in software, and the government issued a lot of bad patents. It’s harder now, but still possible.</p>
-
-      <p>Unlike copyright, patents don’t happen automatically. To receive patent rights, an inventor must apply for a patent and the United States Patent and Trademark Office must grant it. The application process is technical, complex, and takes years, even for unsuccessful applications. It’s possible to apply for and receive a patent without professional help, but well practiced experts—<dfn>patent attorneys</dfn> and <dfn>patent agents</dfn> registered with the Patent Office—speak the language, know the rules, and markedly increase chances of approval for a patent that’s worded for strength and strategic value. Good professional time and government fees during a long application process add up to many thousands of dollars, in the ballpark of a new luxury car.</p>
-
-      <p>A patent lawsuit often costs even more than getting a patent in the first place, on the order of a new supercar. This is often just as true for the side being sued as for the side with the patent. Many companies simply can’t afford to put up a patent fight. Many that can put a lot of people and process on avoiding, slipping out of, and winning as many suits as they can. Some companies exist solely to purchase patents and abuse economics of scale, suing as many companies as possible and scaring them into pricey license agreements to settle court fights they couldn’t afford to win.</p>
-
-      <p>Lawyers make sure that commercial software agreements make clear if and when they grant patent licenses, by saying the word “patent” and listing the specific patents licensed whenever possible. <a href=https://www.apache.org/licenses/LICENSE-2.0.html#patent>Section 3 of the Apache License, Version 2.0</a> follows the general style:</p>
-
-      <blockquote><p><em>Grant of Patent License</em>. Subject to the terms and conditions of this License, each Contributor hereby grants to You a…patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work…</p></blockquote>
-
-      <p>Again, many open source licenses use shorter, more general grants of permission. Many of these licenses are so short or general that lawyers aren’t sure whether they grant a patent license at all, or what it covers. For example, the preamble of <a href=https://spdx.org/licenses/BSD-2-Clause>The Two-Clause BSD License</a> reads:</p>
-
-      <blockquote><p>Redistribution and use in source and binary forms, with or without modification, are permitted…</p></blockquote>
-
-      <p>Permission to “use” software covered by a patent might be a license under that patent. It’s not clear.</p>
-
-      <p>Ideally, drafters of open source licenses would like to completely override the default rules that allow patent owners to sue users and distributors of open source software. The fact that patenting requires application and approval means there may not be any relevant patents to sue under.</p>
-
-      <p>Unfortunately, a key legal difference makes a complete override impossible. Independent reinvention of patented technology doesn’t stop an inventor with a patent from suing. If Ivan patents a new search algorithm and six months later Carol comes up with the same approach and uses it in code for a database, Ivan can sue Carol and users of Carol’s software. Even if Carol uses an open source license with a very clear patent license. Even if Carol came up with the algorithm on her own, knowing nothing of Ivan or his patent. Ivan owns the relevant patent. It isn’t Carol’s to gove away—to license for free on open source terms.</p>
-
-      <p>That’s the opposite of how copyright works. If Ivan writes a limerick and Carol just so happens to come up with the same limerick later, Ivan can’t sue Carol for publishing “his” limerick unless he can prove she copied him, rather than wrote it herself. Because copyright applies to code, a copyright license that properly covers all the material in a project code gets rid of copyright risk for users. But a patent works more like a category or pattern—it does or does not cover specific code. If some piece of code implements, or <em>embodies</em>, a patented invention, the patent owner can sue.</p>
-
-      <p>Drafters of recent open source licenses have tried to address this problem with <dfn>patent-termination clauses</dfn>. Suing users, distributors, or contributors under a patent triggers these clauses, which end the licenses granted to the patent owner for the software.</p>
-
-      <p>Lawyers often use <a href=https://www.apache.org/licenses/LICENSE-2.0.html#patent>the last sentence of section 3 of the Apache License, Version 2.0</a> as the canonical example of open source patent termination:</p>
-
-      <blockquote><p>If You institute patent litigation…alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.</p></blockquote>
-
-      <p>Losing the licenses puts the one suing under a patent at risk of infringement suits if they use or distribute the software. But those with relevant patents may or may not use or distribute any kind of software at all. For patent owners that don’t, including companies that only exist to sue for patent infringement, the termination clause doesn’t have teeth. They don’t need a license for the software to begin with, so they can’t be countersued for infringement.</p>
-
-      <p>Whenever patents and open source cross, lawyers look very carefully at the language of the relevant patent licenses and any patent-termination clauses. Companies may also look into whether contributors to the project are likely to have or seek patents that may apply, or a competitive reason to apply for some.</p>
-
-      <p>Lack of clear patent language in the license for software that implements old, patent-free inventions, or software published by contributors who aren’t likely to have or seek patents, may not pose any risk. Conversely, even very clear, predictable patent language may not be enough for software that’s likely covered by patents belonging to a competitor or well-known patent bully. Companies considering whether or not to contribute code to an open source project also scrutinize patent terms, to make sure they understand what patents they’d be licensing and how. This often involves lawyers with roles and responsibilities that create even less familiarity and friendliness to open source than usual.</p>
-
-      <p>Patents make software law hard, and the anti-defaults of open source make it even harder. If you find yourself staring down the double-barreled shotgun of open source patent law, make no fast moves and get the best advice you can. Not just from lawyers. From engineers who know your company and what’s going on in your industry.</p>
-
-      <h3 id=contract-law>Contract Law</h3>
-
-      <p>Contract laws give private citizens and organizations the power to use public courts to enforce agreements, with rules for interpreting terms and deciding who bears what risk when the agreement doesn’t say. The prime directive of contract laws is to hold parties to contracts to the promises they intended when they made their deal.</p>
-
-      <h4 id=warranties>Warranties</h4>
-
-      <p>Warranties law is a part of contract law. Warranties are promises about products and services covered by contracts. The archetypal warranty gives the purchaser of a new television the right to a repair, replacement, or refund if it quits working a week after purchase, due to shoddy materials or design.</p>
-
-      <p>Many warranties are written out, but the law implies some by default, as well. An implied warranty of <dfn>merchantability</dfn> says, essentially, that goods licensed or sold by someone in the business of selling that kind of thing will be up to usual standards, and not shoddy knock-offs. A default warranty of <dfn>fitness for a particular purpose</dfn> says that goods an industry player sells to a customer who isn’t themself in the biz to meet a specific need will do the job. A default warranty of <dfn>noninfringement</dfn> says that using what you’re buying as expected won’t immediately land you in an infringement lawsuit. These defaults are read into a contract, or <dfn>implied</dfn>, unless explicit terms clearly get rid of, or <dfn>disclaim</dfn>, them.</p>
-
-      <p>Implied warranties from sales-contracts law may or may not apply to terms for open source software, but in some circumstances, they clearly will. The implied warranties would then translate into promises about the quality and functionality of the software. Promises the one giving the software away could get sued for failing to keep.</p>
-
-      <p>Open source licenses disclaim all warranties, among them implied warranties. Typically the words that do this are set in <code>ALL CAPS</code>, and layer general disclaimer language on top of specific disclaimers of merchantability and fitness, for redundancy. Contract law expects contracts to look like sales, and for those selling to get something in return. Owners of software may indeed get something in return for licensing open source, like patches or interest in other products or services they otherwise wouldn’t. But they don’t receive payment, as they would for proprietary software. Without payment coming in, they don’t want to risk paying out on warranties. Even if the warranties arguably make sense.</p>
-
-      <h4 id=liability>Liability</h4>
-
-      <p>The law gives each side of a contract the right to sue the other side for damages when they fail to hold up their end of a bargain. Damages are usually limited to what the court thinks the one at fault could have foreseen when they made their deal. If a software company licenses a badly flawed data backup tool that corrupts a customer’s financial data, the customer might collect the costs of digitizing its records again. If the tool wrecks the control system for the customer’s top secret satellite project, crashing it into a chicken farm, the customer probably can’t get the cost of launching a new satellite, of replacing the chickens, or of the chicken farmer’s anguished grief.</p>
-
-      <p>In order to collect damages, you have to bring a lawsuit or credibly threaten to bring a strong one and convince the other side to settle. Bringing a lawsuit means filing a document that makes <dfn>claims</dfn>—references to laws you say apply to your situation and entitle you to protection from the court or compensation from someone responsible. Those laws might be the contract laws that say a party has to do what it promised, claims for torts like physical harm, property damage, or fraud, and so on.</p>
-
-      <p>Commercial software licenses usually set a limit on the total amount of money the one selling the software can owe as damages. Often that <dfn>limit on liability</dfn> is the same as, or a multiple of, what the customer pays for the software. If the limit is high, the seller might buy insurance to help cover.</p>
-
-      <p>Open source software licenses almost universally limit damages, too—to zero, nothing, nada, the same as contributors get paid. They also exclude all the kinds of legal claims—contract, tort, whatever. Liability under a license agreement makes a lot more sense when the one giving the license gets paid. Giving software away for free and keeping the risk of liability would not make sense for many contributors, especially individuals.</p>
-
-      <h4 id=formation>Formation</h4>
-
-      <p>The law requires two sides to take some kind of intentional action to create an enforceable contract. The law usually talks about this process in terms of one side making an offer of terms, and the other side accepting the offer. A contract is born.</p>
-
-      <p>If Able offers Bob terms for an agreement, and Bob accepts, Able and Bob have a contract. If they intended some of their terms to benefit Candice, as well, Candice may be able enforce the parts of the Able-and-Bob contract that are supposed to benefit her. But Able and Bob can’t make enforceable promises on behalf of Candice without her. If Able wants an enforceable promise from Candice, he needs to make a contract with Candice.</p>
-
-      <p>If Bob and Candice both contributed to an open source software project, Able will want licenses from both of them to know he’s free to use the code. Lawyers disagree about whether open source licenses are contracts, technically speaking. But they agree that users need everyone with intellectual property in the project to override the troublesome legal defaults. Everyone with copyright in code in the project should give a copyright license. Ideally, everyone with a patent covering the software should give a patent license, too.</p>
-
-      <p>Open source projects try to accomplish this in a number of ways. Each contributor can independently provide their contributions to the public under an open source license. Some open source licenses try to address contributor licensing directly, as does <a href=https://www.apache.org/licenses/LICENSE-2.0#contributions>section 5 of the Apache License, Version 2.0</a>.  Some projects use additional terms, like the <a href=https://developercertificate.org/>Developers Certificate of Origin</a>, to help shore up evidence that everyone makes their contribution under open source terms. Contributors can also sign special-purpose contributor agreements to license intellectual property in their contributions to a single person or entity, like a foundation, which in turn licenses everyone else. Or contributors can assign their rights in contributions to another, who in turn licenses it to others, as with some Free Software Foundation projects. The important point from a users’s point of view is that each contributor creates a written record of overriding the proprietary software defaults, and a written record they can find later, if they’re sued.</p>
-
-      <p>Tools for all of these approaches tend to pay special attention to who owns the intellectual property that individual contributors create. In typical employment and contractor relationships, copyrights and patent rights in job-related work belong to employers and clients, rather than the coders. That means the employers and clients, not the coders, need to give the licenses, at least some of the time. Because of this, open source foundations looking carefully after project intellectual property usually require contributor agreements or assignments from individual contributors as well as their employers. They don’t want to take in and start distributing code that the contributor didn’t have permission to publish and license.</p>
-
-      <p>In the proprietary software world, nearly all software comes with a warranty that the seller has all the rights they need to license the customer. With very rare exception, open source licenses never do. That means it’s up to users and distributors, the consumers of open source, to do their own research and come to their own conclusions about risk. As a result, a company may need to look past what open source license a project uses to who has contributed and how the project managed rights in their contributions. Again, the key is whether users can find written records that show everyone relevant overrode the legal defaults.</p>
-
-      <p>Specifics matter. If the software implements patented inventions, uses an open source license with a clear patent license, received contributor license agreements from patent holding contributors—all good news—but used a form contributor license agreement with no patent language, using that software may put a company at unacceptable patent risk. If programmers contributed code they may have written at work or for a client, without making a certificate or signing a contributor license agreement, they may not have thought about whether the rights were theirs to license. The public records a software project has, like revision control data, are often as important as the license notice in determining whether a project is safe to use.</p>
-
-      <h3 id=real-world-risk>Real-World Risk</h3>
-
-      <p>Few private companies match the legal and process rigor of the large, enterprise-focused open source foundations, even for proprietary software they sell for lots of money. At the same time, it’s easy to meet an open source contributor who believes all code pushed to public repositories automatically becomes open source and does nothing in particular about contributions to their own projects. Very, very few open source projects do licensing completely right. But plenty of big, important companies—the best targets for lawsuits—use lots of open source software, under a variety of licenses.</p>
-
-      <p>Enforcement of license rules is relatively lax in some areas of software, like web application programming. In other areas, like embedded systems, compliance is better ingrained. Some foundations strongly favor enforcing licenses only to gain compliance—getting license notices fixed, getting source code released, getting staff trained to avoid another violation—rather than to collect court judgments for money. On the other hand, companies relying on rules of the open source licenses for software they release for their business models have taken violators to court and got settlements. Outside the courts, naming-and-shaming violators increasingly happens in the open, on the Internet, where it can take a very immediate, serious toll on reputation. Especially for companies that compete to recruit computer programmers who identify with open source.</p>
-
-      <p>Most lawsuits begin in private, with demand letters, rather than in public, with lawsuit filings in court. But overall, lawsuits in open source seem rare. For individuals and many small companies, there would be little point in suing anyway, since there is no significant money to be won from them. Conversely, community goodwill and reputation remain very valuable for users and creators of open source software alike. More valuable, in many cases, than insisting on their legal rights.</p>
-
-      <p>That said, the overall picture hides a lot of project- and case-specific variation. It’s not a safe general rule to say that open source license rules don’t matter in practice. Nor does it make sense to pretend that every violation gets punished under the strictest possible reading of the rules. We have to look through the general category of open source to the specific projects, companies, institutions, and people involved in the open source we want to use or contribute to.</p>
-
-      <h2 id=implementations>Implementations</h2>
-
-      <p>The phrase “open source” was coined in the late 1990s to rebrand what had been called “free software” for a stronger pitch to the business world. A string of headline-grabbing conversion stories—Netscape’s release of their Mozilla web browser in 1998, a handful of successful IPOs in 1999, IBM’s coming out for the Linux kernel that same year—cemented open source as a business phenom. New interest in open source led to a flurry of new open source licenses, often specific to a single project or company. But over time, the open source community standardized on a few licenses reused for many projects. Reusing a well known license meant one less license for potential users to read and understand.</p>
-
-      <p>The popular open source license tools can be grouped into a few classes.</p>
-
-      <h3 id=permissive-licenses>Permissive Licenses</h3>
-
-      <p><dfn>Permissive</dfn> licenses come with minimal rules. They almost always require attribution: including a copy of the copyright notice and license terms that came with the software with all new copies of the software. They may also impose other obligations, often annoying but procedural chores like listing any changes made to an official version of the software. Conditions satisfied, all are free to use permissively licensed open source software, redistribute it, make changes, and combine with other, even proprietary software in new programs and products.</p>
-
-      <p>The MIT-style family of licenses, including <a href=https://spdx.org/licenses/MIT>The MIT License</a> and <a href=https://spdx.org/licenses/ISC>ISC License</a>, are permissive licenses, popular in a variety of software communities. Much the same is true of the BSD family of licenses, in <a href=https://spdx.org/licenses/BSD-2-Clause>two-</a> and <a href=https://spdx.org/licenses/BSD-3-Clause>three-clause</a> variants. The Artistic licenses, versions <a href=https://spdx.org/licenses/Artistic-1.0>1.0</a> and <a href=https://spdx.org/licenses/Artistic-2.0>2.0</a>, hail from the Perl programming language community, but apply to a few important projects in other areas, as well. <a href=https://apache.org/licenses/LICENSE-2.0>The Apache License, Version 2.0</a> applies to many Apache Foundation and other projects. The more recent <a href=https://blueoakcouncil.org/license/1.0.0>Blue Oak Model License</a> set a higher bar for approachable, professional drafting in permissive open source licensing.</p>
-
-      <p>Permissively licensed open source software is often the easiest for companies to approve for use as published, for reuse with changes, and for inclusion in binary or source-obfuscated programs. It’s usually legally straightforward to incorporate permissively licensed open source software into other software, even proprietary software, and to combine it with other open source. With older permissive licenses, like MIT- or BSD-style licenses, there may be stronger concerns about patent risk, since it isn’t clear if or how those licenses cover patent rights.</p>
-
-      <p><a href=https://blueoakcouncil.org>Blue Oak Council</a> publishes a <a href=https://blueoakcouncil.org/list>reference list of permissive open source software licenses</a>, ranked by quality and legal strength.</p>
-
-      <h3 id=copyleft-licenses>Copyleft Licenses</h3>
-
-      <p><dfn>Copyleft</dfn> licenses work like permissive licenses with additional rules. Those additional rules require those who distribute copies of software to provide source code and the same license terms for that code to recipients, for the original code as well as some or all changes, enhancements, and other code combined with the copyleft code. Many in the copyleft licensing community consider these rules necessary to preserve users' abilities to run, understand, and improve software.In other words, they rely on copyleft rules to keep open source open.</p>
-
-      <p>Copyleft licenses are often compared in the strengths of their rules that require sharing alike. Strong copyleft licenses trigger source code and license terms requirements in more situations, for more code. Those requirements may themselves demand more by way of compliance. Weaker copyleft licenses give clear ways to avoid source and license-terms requirements by separating new code from that of the project, less stringent requirements when copyleft is triggered, or both.</p>
-
-      <p><a href=https://blueoakcouncil.org>Blue Oak Council</a> publishes a <a href=https://blueoakcouncil.org/copyleft>guide to copyleft licenses</a> that includes <a href=https://blueoakcouncil.org/copyleft#copyleft-families>a list of “families”</a>, clustering copyleft licenses together by strength and approach.
-
-      <p>Combining open source software with other software and sharing the results usually triggers rules of all the open source licenses involved. Copyleft license rules especially can clash with the rules of other licenses: permissive, copyleft, or proprietary. When combined software triggers more than one set of rules that can’t be satisfied at the same time—such as when the licenses of two copyleft libraries require different sets of terms for the combined program as a whole—that combination prevents distributing the combined software. Licenses that clash this way are called <dfn>incompatible</dfn>.</p>
-
-      <p>Continuing the example, one or both libraries with conflicting copyleft licenses might <dfn>relicense</dfn>, or change their license terms, to avoid incompatibility. This can be very difficult or impossible to coordinate for projects with many contributors who can’t be reached for agreement to offer the new terms. Some projects have chosen to <dfn>dual license</dfn>—offer a choice of two or more open source licenses—in hopes that users will be able to pick at least one that avoids a compatibility problem with other software. Other projects have adopted variations on standard open source licenses adding <dfn>license exceptions</dfn> that allow their copyleft rules to yield to the copyleft rules of other, more popular copyleft licenses.</p>
-
-      <p>The best-known copyleft licenses are the GNU General Public Licenses, maintained by the <a href=https://fsf.org>Free Software Foundation</a>, home of the <a href=https://gnu.org>GNU Project</a>. The <a href=https://kernel.org>Linux Kernel</a> uses <a href=https://www.gnu.org/licenses/old-licenses/lgpl-2.0.html>GPL version 2.0</a>. Both GPL version 2.0 and <a href=https://www.gnu.org/licenses/gpl-3.0.html>GPL version 3.0</a> apply to a great deal of software frequently used with Linux. Linus Torvalds and the FSF have published clarifications of some of the more vague terms of the GPL for their software.</p>
-
-      <p>The FSF also maintains the weaker <a href=https://www.gnu.org/licenses/lgpl-3.0.en.html>LGPL</a> family of licenses, used for many linked libraries, to require source and licensing only of changes to the library, not programs builds with it. On the other hand, the Affero variants of the GPL, or <a href=http://www.gnu.org/licenses/agpl-3.0.en.html>AGPL</a> licenses, strengthen copyleft to trigger source and license-terms requirements when software is made available to use over a network.</p>
-
-      <p>The <a href=https://mozilla.org>Mozilla</a> and <a href=https://eclipse.org>Eclipse</a> foundations maintain the <a href=https://www.mozilla.org/en-US/MPL/2.0/>Mozilla Public License</a> and <a href=https://www.eclipse.org/legal/epl-2.0/>Eclipse Public License</a> for the projects they host. These are considered weaker copyleft licenses than the GPL, and use a drafting style more familiar to professional licensing lawyers, akin to that of <a href=https://apache.org/licenses/LICENSE-2.0>The Apache License, Version 2.0</a>.</p>
-
-      <p>Most companies that use open source software use significant amounts of copyleft software, often with GNU/Linux as a base system. Using copyleft software internally, without changes, can be just as simple as using permissively licensed software. But it’s often a trick to stay within those lines, operationally, over time.</p>
-
-      <p>When a company needs to make changes to copyleft software, wants to make copyleft software part of its own software or services, or both, license compliance gets more complicated. Whenever possible, companies like to avoid questions about whether their plans will trigger copyleft rules, and what they will have to do to comply. Relatively new, strong-copyleft licenses like Affero GPL breed the most anxiety and confusion. Companies can find and hire both lawyers and compliance professionals familiar with copyleft to help manage copyleft complexity, but prefer to avoid the problem altogether by avoiding code under those terms.</p>
-
-      <p>Copyleft licenses are harder to comply with, reliably, than permissive licenses. Wise company counsel have reason to scrutinize copyleft code coming into their domains more carefully than permissively licensed code. But much ill-founded fear, uncertainty, and doubt around copyleft—especially about “viral” licenses “infecting” proprietary code—continues to waft off early public relations efforts to scare customers away from open source software competing with proprietary products.</p>
-
-      <p>Overall, deciding whether to work with copyleft software is neither trivially easy nor impossibly hard. From a typical business point of view, assessing copyleft software is akin to assessing whether to accept a give-and-take deal, while assessing permissive software feels more like deciding whether to accept a free gift. Weighing a give-and-take proposition usually means considering more specifics and long-term goals, but gifts can also be welcome or burdensome.</p>
-
-      <p>You might like a good deal on pizza delivery better than the generous gift of a puppy dog you’re not keen to care for. A great piece of copyleft software, even with complex copyleft conditions, might work out better for a company than permissively licensed code when all manner of intellectual property, usability, or maintenance issues are considered.</p>
-
-      <h3 id=applying-licenses-to-code>Applying Licenses to Code</h3>
-
-      <p>There are all kinds of conventions, traditions, and fashions in how, exactly, open source licenses get applied to code to make it open source. The good news is that they mostly boil down to putting a copy of a license, or mention of a license and where to find its text online, in files next to the code. Whatever method contributors choose to distribute their code—publicly accessible web server directory, hosted revision control repository, published archive—they make sure it comes with an easy-to-find statement, or <dfn>notice</dfn>, of license terms.</p>
-
-      <p>Probably the most common method is adding a file to the root of a project’s directory with a name like <code>LICENSE</code> or <code>COPYING</code>. A close second is mentioning a license in a header comment at the top of each source file. Some authors also mention licensing in standard documentation files, as at the bottom of <code>README</code>. More recently, package metadata formats—<a href=https://maven.apache.org>Maven</a>’s, <a href=https://rubygems.org>RubyGems</a>’, <a href=https://npmjs.com>npm</a>’s, <a href=https://doc.rust-lang.org/cargo/>Cargo</a>’s—specify a field and format to identify standard open-source license terms, often using a standardized short code of <dfn>identifier</dfn> for a license specified by <a href=https://spdx.org/licenses>SPDX</a>.</p>
-
-      <p>The good news is that these methods seem to work. There have been relatively few court cases involving open source licenses in the United States, but those we’ve seen have reached decisions on the assumption that the terms in the notice are the terms for the code. The bad news is that, in practice, issues frequently crop up when code under multiple licenses, from different contributors, ends up in the same archive or distribution artifact. It’s often unclear what license from who applies applies to what code. It’s even more common to see code combined in one place without license notices being combined there, too.</p>
-
-      <p>The Software Package Data eXchange (SPDX) project under the Linux Foundation published a standard for metadata to describe the license terms of software artifacts. This approach differs in allowing consumers, rather than maintainers and distributors, to review code for license information and annotate code with machine-readable metadata. A key motivation for the project is to enable consumers of open code to exchange licensing annotations, reducing duplication of effort. SPDX' metadata standard has been adopted by some large companies, but it remains to be seen whether it will take off industry-wide.</p>
-
-      <h3 id=contribution-management>Contribution Management</h3>
-
-      <p>Many open-source contributors believe that sending a patch to an existing open-source project without any mention of licensing gives permission to use their contribution under the same terms that apply to the existing code. This idea, which Richard Fontana calls “inbound=outbound”, is very common. But it is not the law.</p>
-
-      <p>To date, the lawyer-pleasing approach to contributor licensing has been the Apache Foundation’s layered use of <a href=https:///www.apache.org/licenses/LICENSE-2.0#contributions>a section about contributions in its license form</a> and <a href=https://www.apache.org/licenses/icla.pdf>contributor license agreements between contributors and the Apache Foundation</a>, which in turn licenses the public to use Apache software. For contributors with a company affiliation, Apache also signs <a href=https://www.apache.org/licenses/cla-corporate.pdf>a contributor agreement with the company</a>, covering contributors by company personnel. Other institutional stewards of open-source projects, foundations and private companies, have made do with just individual contributor license agreements.</p>
-
-      <p>Unfortunately, contributor license agreements are imposing legal documents—almost universally longer and denser than The MIT License or even GPL version 2—especially for contributors starting from the false assumption that no license document from them at all is plenty clear enough. Ensuring that signed contracts precede accepted patches is also a drag, even with bots or scripts to help automate the process. The cost is particularly high for small and relatively informal projects, which can otherwise attract a lot of small commits, rapid fire, for which nobody wants wants to spend more time reading, signing, and filing a contract than making the commits.</p>
-
-      <p>Shaken by the SCO lawsuits, but unwilling to impose the inconvenience of a centralized CLA service on a sprawling network of contributors, Linux Kernel developers developed the <a href=https://developercertificate.org/>Developer Certificate of Origin</a>. The DCO, a short statement from the coder’s point of view that they’re sure they have all the permission they need to contribute the code they’re offering, isn’t a license, nor is it a guarantee that the contributing coder has the rights they claim. But even when referenced shorthand, via <code>Signed-Off-By</code> tags in Git commit messages, it arguably creates a relevant and permanent written record of attribution and licensing diligence for all contributors. Those kinds of records might have been enough to stave off claims, like those from SCO, that code in the Linux codebase came not from open source contributors, but from their own, copyrighted code. The Eclipse Foundation has since approved this mechanism, in lieu of its prior, Apache-esque contributor license agreements.</p>
-
-      <p>Finally, a special note on copyright assignments, especially for projects under copyleft licenses. Historically, both some foundations and many private-company stewards required not <em>licenses</em>, but <em>assignments</em> of copyrights in contributions for acceptance into their open-source projects. In general terms, assignments change the ownership of copyrights, while licenses merely give permission under them. Confusingly enough, organizations that required assignments often guaranteed that they would license assigned copyrights right back to the public, including the develop who assigned them to the organization to begin with. As a kind of a middle ground, the Oracle Corporation required assignments of joint ownership in contributions, so both Oracle and the contributor owned their contributions. The Clojure programming language project tweaked that model, <a href=https://clojure.org/community/contributing>adapting Oracle’s form</a>, to require joint ownership of contributions with Rich Hickey, the leader of the project, personally.</p>
-
-      <p>Assignments work much like contributor license agreements, and sometimes have essentially the same legal effect, due to rights granted back to contributors. But assignments inevitably entail more hassle, since many countries’ laws require notarization or other formalities to assign intellectual property rights by contract. Not to mention they sound scary and unnecessary. If the corporate steward on the other side is more than willing to use open-source software under license, why does it require assignment from contributors to its own projects?</p>
-
-      <p>Some organizations required assignments just because that was the most they could get, and legal advice was to get as much as possible. In some cases, this produced backlash, which was often deserved for lack of good and transparent communication, if not for the legal substance of the assignment agreements themselves.</p>
-
-      <p>One early, rational case for assignment was relicensing. If the steward of a project anticipates that they may want to change the license terms for a project in the future, agreements to license contributions under the current license terms mean a whole lot of work hunting down old contributors later. Where there are many contributors, that may not be practically possible. Eventually, drafters of contributor license agreements turned to this problem and built rights to relicense into many forms. Often these forms limit relicensing, so that the steward can’t chose whatever terms—say, proprietary terms—they may like. A choice of licenses approved by named foundations—the Open Source Initiative, Free Software Foundation, Debian, or some combination—is also common.</p>
-
-      <p>A more lasting argument for assignment is to create a single legal entity with all the relevant rights needed to bring a lawsuit for infringement. For reasons of legal procedure and negotiating leverage, having a single copyright owner makes it much easier to sue someone skirting license conditions for infringement, and compel a settlement. The more license conditions the open-source license you use, and the more meaningful the objectives those conditions aim to achieve, the more valuable centralized ownership becomes. Accordingly, copyleft-focused organizations like the Free Software Foundation and Software Freedom Law Center, both active enforcers of GPL copyleft conditions, routinely require assignments for contributed code.  These organizations primarily enforce license conditions to secure compliance—release of source code—but need strong claims that they can sue in court for damages, as leverage.</p>
-
-      <h2 id=additional-resources>Additional Resources</h2>
-
-      <h3 id=important-institutions>Important Institutions</h3>
-
-      <p>You should be aware of a number of important institutions in the open source world. These institutions are important sources of information, decisions. Some host important projects.</p>
-
-      <p>Many also publish points of view on policy, operational, and legal issues. Often enough, they disagree. You should be aware of these positions and disagreements when they affect licenses or software that interest you. A foundation’s positions often carry extra weight for software projects that the foundation hosts.</p>
-
-      <ul>
-        <li><p>The <a href=https://opensource.org>Open Source Initiative</a> promotes the concept of open source, publishes a <a href=https://opensource.org/osd-annotated>definition of open source</a>, and maintains <a href=https://opensource.org/licenses>a list of licenses they have approved as open source</a>.</p></li>
-
-        <li><p>The <a href=https://www.fsf.org>Free Software Foundation</a> promotes the concept of free software, publishes a <a href=https://www.gnu.org/philosophy/free-sw.html.en>definition of free software</a>, maintains the <a href=https://www.gnu.org/licenses/>GPL family of copyleft licenses</a> and related <a href=https://www.fsf.org/licensing/enforcement-principles>enforcement principles</a>, and hosts many software projects.</p></li>
-
-        <li><p>The <a href=https://www.linuxfoundation.org>Linux Foundation</a> hosts the Linux Kernel and other projects, leads several patent-related initiatives, and supports the <a href=https://spdx.org>Software Package Data eXchange licensing metadata standards project</a>. The Linux Foundation also serves as an umbrella organization for other open source foundations.</p></li>
-
-        <li><p>The <a href=https://www.apache.org>Apache Foundation</a>, <a href=https://eclipse.org>Eclipse Foundation</a>, <a href=https://www.mozilla.org>Mozilla Foundation</a>, and other foundations host projects and maintain standard form licenses.</p></li>
-
-        <li><p><a href=https://fsconservancy.org>Software Freedom Conservancy</a> hosts a number of projects</p></li>
-
-        <li><p><a href=https://blueoakcouncil.org>Blue Oak Council</a> publishes free, practical materials about software licenses, including a <a href=https://blueoakcouncil.org/list>list of permissive licenses</a>, <a href=https://blueoakcouncil.org/copyleft>guide to copyleft licenses</a>, and example compliance policies for large and small organizations.</p></li>
-      </ul>
-
-      <h3 id=further-reading>Further Reading</h3>
-
-      <p>The best book on open source for business, with especially strong coverage of copyleft licenses like the GPL, is Heather Meeker’s <em><a href=https://www.amazon.com/dp/1511617772>Open (Source) for Business</a></em>. I recommend it to clients.</p>
-
-      <p>The best book on open source in the broader context of intellectual property law more generally is Van Lindberg’s <em><a href=https://www.oreilly.com/library/view/intellectual-property-and/9780596517960/>Intellectual Property and Open Source</a></em>. Published in 2008, it’s a bit dated now, especially on patent and trade secret law, where we’ve seen very important legal changes. But it remains a good survey introduction.</p>
-
-      <p>If you enjoyed this guide, you may enjoy my <a href=https://writing.kemitchell.com>blog</a>. Folks seem to like <a href=https://writing.kemitchell.com/2017/03/29/OSS-Business-Perception-Report.html>my guide to how business views specific licenses</a>, a <a href=https://writing.kemitchell.com/2016/09/21/MIT-License-Line-by-Line.html>line-by-line rundown of The MIT License</a>, and <a href=https://writing.kemitchell.com/2016/05/13/What-Open-Source-Means.html>my thoughts on how the meaning of “open source” is changing</a>. I’ve also published a <a href=https://fieldguide.kemitchell.com>field guide to the major species of intellectual property</a></p>
-
-      <h2 id=thanks>Thanks</h2>
-
-      <p>My special thanks to Kunal Marwaha, for proofreading help.</p>
-    </main>
-
-    <footer role=contentinfo>
-      <p>© <a href=https://kemitchell.com>Kyle E. Mitchell</a></p>
-
-      <p>Originally published at <a href=https://oss.kemitchell.com>oss.kemitchell.com</a>.</p>
-
-      <p>Licensed under the terms of the <a href=https://creativecommons.org/licenses/by-nd/4.0/legalcode>Creative Commons Attribution-NoDerivatives 4.0 International License</a>.</p>
-    </footer>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Open Source: Theory of Operation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://readable.kemitchell.com/all.css">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Open Source: Theory of Operation">
+  <meta name="twitter:description" content="introduction to open source licensing for business users">
+  <meta name="twitter:image" content="https://writing.kemitchell.com/placeholder-on-white.png">
+  <meta name="twitter:creator" content="@kemitchell">
+  <meta name="og:type" content="website">
+  <meta name="og:title" content="Open Source: Theory of Operation">
+  <meta name="og:description" content="introduction to open source licensing for business users">
+  <meta name="og:image" content="https://writing.kemitchell.com/placeholder-on-white.png">
+</head>
+<body>
+  <header role="banner">
+    <h1>Open Source:<br>
+    Theory of Operation</h1>
+    <p>Last Updated <time datetime="DATETIME">UPDATED</time></p>
+  </header>
+  <nav role="navigation">
+    <ol>
+      <li>
+        <a href="#in-brief">In Brief</a>
+      </li>
+      <li>
+        <a href="#operating-environment">Operating Environment</a>
+        <ol>
+          <li>
+            <a href="#defaults-and-overrides">Defaults and Overrides</a>
+          </li>
+          <li>
+            <a href="#intellectual-property-law">Intellectual Property Law</a>
+          </li>
+          <li>
+            <a href="#contract-law">Contract Law</a>
+          </li>
+          <li>
+            <a href="#real-world-risk">Real-World Risk</a>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <a href="#implementations">Implementations</a>
+        <ol>
+          <li>
+            <a href="#permissive-licenses">Permissive Licenses</a>
+          </li>
+          <li>
+            <a href="#copyleft-licenses">Copyleft Licenses</a>
+          </li>
+          <li>
+            <a href="#applying-licenses-to-code">Applying Licenses to Code</a>
+          </li>
+          <li>
+            <a href="#contribution-management">Contribution Management</a>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <a href="#additional-resources">Additional Resources</a>
+        <ol>
+          <li>
+            <a href="#important-institutions">Important Institutions</a>
+          </li>
+          <li>
+            <a href="#further-reading">Further Reading</a>
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </nav>
+  <main role="main">
+    <p>This is a short, practical guide to open source software for programmers at work. If you code on the job and wonder how open source works, why you can use some kinds and not others, or what you have to do to get away with it, this guide’s for you. Feedback is welcome at <a href="https://github.com/kemitchell/oss.kemitchell.com">github.com/kemitchell/oss.kemitchell.com</a>.</p>
+    <p><strong>Spoiler Alert</strong>: If your company or contract client has an open source policy or approval process, do what their policy says. Read the policy—I’m serious—and follow it. If you’re new to this stuff, you will probably feel better equipped to understand, talk about, and perhaps improve that policy after reading through this guide. The policy and the people who administer it might even start to make sense.</p>
+    <p>Either way, know going in that this guide abstracts away some details, exceptions, and edge cases to make the whole package more accessible. Fortunately, good sources of detail on open source licensing and compliance are easy to find. Almost all the good stuff is on the Internet. Buried in mounds of ill-considered histrionics, granted. But you can learn to tell the difference.</p>
+    <p>Do <em>not</em> extrapolate from the breezy generalizations you find here to specific, business-critical decisions without further research. In other words, <a href="https://notlegaladvice.law">don’t make this guide the last thing you read before taking a big decision</a>. Educate yourself further, look at what others have done and got away with, and if at all possible, talk to your company’s lawyers and compliance pros. That should be easier once you’ve read this guide.</p>
+    <h2 id="in-brief">In Brief</h2>
+    <ol>
+      <li>
+        <p>Open source software licenses override legal defaults to make giving away and using software safe and easy.</p>
+      </li>
+      <li>
+        <p>To enjoy that convenience as a user, you have to follow a few license requirements, like attributing open source work to those who licensed it.</p>
+      </li>
+      <li>
+        <p>Copyleft licenses have more requirements. Usually you have to give users access to source code and use similar license terms for work that builds on the copyleft code.</p>
+      </li>
+      <li>
+        <p>Some open source licenses take permission away from anyone who uses patents to sue other users or contributors.</p>
+      </li>
+      <li>
+        <p>Contributor license agreements, assignments, and developer certificates create records showing that legal defaults get overridden by all those who have intellectual property in a project.</p>
+      </li>
+    </ol>
+    <h2 id="operating-environment">Operating Environment</h2>
+    <p>Under current law, software never starts out as open source. People who own rights in software have to turn it into open source software with legal tools called <dfn>open source licenses</dfn>. Open source licenses override legal defaults that fit the traditional, proprietary model of software developed behind closed doors and licensed to customers for a fee under negotiated contracts. Open source licenses replace those defaults with written terms that make publishing, distributing, and using open source software relatively simple and low-risk.</p>
+    <p>When open source licenses work correctly, users and distributors, like your company, needn’t worry about the proprietary-style legal defaults. But you can’t understand how open source licenses work, or decide whether a license overrides all the defaults your company should worry about, if you don’t understand what the default rules for software are in the first place.</p>
+    <h3 id="defaults-and-overrides">Defaults and Overrides</h3>
+    <p>In summary, the most important legal defaults and open source overrides are:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Law</th>
+          <th>Area</th>
+          <th>Legal Default</th>
+          <th>Open Source Override</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <a href="#intellectual-property-law">IP</a>
+          </td>
+          <td>
+            <a href="#copyright-law">Copyright</a>
+          </td>
+          <td>Owners can sue for copying work.</td>
+          <td>Owners license to make copies.</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#intellectual-property-law">IP</a>
+          </td>
+          <td>
+            <a href="#copyright-law">Copyright</a>
+          </td>
+          <td>Owners can sue for distributing work.</td>
+          <td>Owners license to distribute.</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#intellectual-property-law">IP</a>
+          </td>
+          <td>
+            <a href="#copyright-law">Copyright</a>
+          </td>
+          <td>Owners can sue for changing work.</td>
+          <td>Owners license to make changes.</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#intellectual-property-law">IP</a>
+          </td>
+          <td>
+            <a href="#patent">Patent</a>
+          </td>
+          <td>Owners can sue for using inventions.</td>
+          <td>Owners license to use.</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#intellectual-property-law">IP</a>
+          </td>
+          <td>
+            <a href="#patent">Patent</a>
+          </td>
+          <td>Owners can sue for making inventions.</td>
+          <td>Owners license to make.</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#intellectual-property-law">IP</a>
+          </td>
+          <td>
+            <a href="#patent">Patent</a>
+          </td>
+          <td>Owners can sue for selling inventions.</td>
+          <td>Owners license to sell.</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#intellectual-property-law">IP</a>
+          </td>
+          <td>
+            <a href="#patent">Patent</a>
+          </td>
+          <td>Owners can sue for importing inventions.</td>
+          <td>Owners license to import.</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#contract-law">Contract</a>
+          </td>
+          <td>
+            <a href="#warranties">Warranties</a>
+          </td>
+          <td>Sellers guarantee merchantability.</td>
+          <td>Owners disclaim merchantability.</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#contract-law">Contract</a>
+          </td>
+          <td>
+            <a href="#warranties">Warranties</a>
+          </td>
+          <td>Sellers guarantee fitness for purpose.</td>
+          <td>Owners disclaim fitness for purpose.</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#contract-law">Contract</a>
+          </td>
+          <td>
+            <a href="#warranties">Warranties</a>
+          </td>
+          <td>Sellers guarantee noninfringement.</td>
+          <td>Owners disclaim noninfringement.</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#contract-law">Contract</a>
+          </td>
+          <td>
+            <a href="#liability">Liability</a>
+          </td>
+          <td>Buyers can sue for foreseeable damages.</td>
+          <td>Terms limit liability to zero.</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#contract-law">Contract</a>
+          </td>
+          <td>
+            <a href="#liability">Liability</a>
+          </td>
+          <td>Buyers can sue in contract, tort, &amp;c.</td>
+          <td>Terms exclude all claims.</td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#contract-law">Contract</a>
+          </td>
+          <td>
+            <a href="#formation">Formation</a>
+          </td>
+          <td>Each contributor licenses their part.</td>
+          <td>Same terms, from all contributors.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Not all open source licenses override every default listed here. Some open source licenses do a better job of overriding specific defaults than others. Many open source licenses address more legal rules, either to override defaults or make clarifications.</p>
+    <h3 id="intellectual-property-law">Intellectual Property Law</h3>
+    <p>Intellectual property laws give monopolies over many kinds of techniques, ideas, symbols, and products of thinking work. The strongest core idea behind these laws—the primary <dfn>policy</dfn> behind them—is to reward those risking and investing with the right to control the benefits of their results, so they can charge others to use them, earning a just reward.</p>
+    <p>Using intellectual property without permission is <dfn>infringement</dfn>. The law allows intellectual property owners to sue infringers to get court orders to stop infringement—<dfn>injunctions</dfn>—pay money to the owners—<dfn>damages</dfn>—or both. Owners can sell permission, in the form of <dfn>licenses</dfn>, to do what would otherwise count as infringement. Owners can also sell or assign intellectual property to others, making them the new owners.</p>
+    <p>The key intellectual property laws for open source are copyright and patent laws.</p>
+    <h4 id="copyright-law">Copyright Law</h4>
+    <p>Copyright law rewards authors of creative works with rights to stop others from making copies of their work or using it as a starting point for new work. The archetype of a copyright owner is the writer who sells a publisher exclusive license to print and sell their novel as a book.</p>
+    <p>If code, documentation, configuration, or data—almost anything you can store in files—is even a tiny bit creative, copyright applies automatically, from the moment it’s typed out. There’s no requirement to file with the government or pay any fees, at least until you want to sue for infringement. Since copyright damages for even small infringement can be very large, and making sure a piece of work utterly lacks legal “creativity” is hard and takes legal expertise, most savvy companies and savvy open source projects treat every bit of software and documentation they receive as though someone owns copyright in it.</p>
+    <p>Lawyers read nearly all common open source licenses to grant everyone a copyright license. By default, nobody has a license, and the copyright owner can sue them if they infringe. Giving everyone a license—a <dfn>public license</dfn>—overrides the default, so the owner can’t sue anyone, so long as they follow all the rules of the license.</p>
+    <p>Professionally drafted license agreements make clear when a license is a copyright license by using the word “copyright”. For example, the copyright license in <a href="https://www.apache.org/licenses/LICENSE-2.0.html#copyright">section 2 of the Apache License, Version 2.0</a> reads:</p>
+    <blockquote>
+      <p><em>Grant of Copyright License</em>. Subject to the terms and conditions of this License, each Contributor hereby grants to You a…copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.</p>
+    </blockquote>
+    <p>This is the style most professional licensing lawyers use and expect. Actually, it’s pretty modern by lawyer standards. It’s the style of better proprietary software licenses.</p>
+    <p>Many open source licenses use a less structured style. These licenses give “permission” or say that users “may” do things with the software that would otherwise infringe copyright, without saying “copyright”. For example, the first paragraph of <a href="https://spdx.org/licenses/MIT">The MIT License</a> begins:</p>
+    <blockquote>
+      <p>Permission is hereby granted…to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software…</p>
+    </blockquote>
+    <p>Without this language, copying, modifying, publishing, or distributing would infringe any copyrighted work in the software. Using and selling, on the other hand, might infringe patents.</p>
+    <h4 id="patent">Patent</h4>
+    <p>Patent law rewards inventors who publish their findings through the government with twenty-year rights to stop others from making, using, selling, or importing goods and services that implement them. The archetype of a patent owner invents a better mousetrap in their garage, secures a patent, sues a company that makes their trap without permission, and settles the lawsuit for a big check and a royalty.</p>
+    <p>Teaching a computer to do something useful, instead of a person or some other machine, does not, in itself, entitle the programmer to a patent. But new inventions that happen to be implemented in software, and new inventions in the art of making software, can be patented. Algorithms, data structures, protocols, and other methods of achieving useful results with software have all been covered by patents. It used to be easier to patent ideas in software, and the government issued a lot of bad patents. It’s harder now, but still possible.</p>
+    <p>Unlike copyright, patents don’t happen automatically. To receive patent rights, an inventor must apply for a patent and the United States Patent and Trademark Office must grant it. The application process is technical, complex, and takes years, even for unsuccessful applications. It’s possible to apply for and receive a patent without professional help, but well practiced experts—<dfn>patent attorneys</dfn> and <dfn>patent agents</dfn> registered with the Patent Office—speak the language, know the rules, and markedly increase chances of approval for a patent that’s worded for strength and strategic value. Good professional time and government fees during a long application process add up to many thousands of dollars, in the ballpark of a new luxury car.</p>
+    <p>A patent lawsuit often costs even more than getting a patent in the first place, on the order of a new supercar. This is often just as true for the side being sued as for the side with the patent. Many companies simply can’t afford to put up a patent fight. Many that can put a lot of people and process on avoiding, slipping out of, and winning as many suits as they can. Some companies exist solely to purchase patents and abuse economics of scale, suing as many companies as possible and scaring them into pricey license agreements to settle court fights they couldn’t afford to win.</p>
+    <p>Lawyers make sure that commercial software agreements make clear if and when they grant patent licenses, by saying the word “patent” and listing the specific patents licensed whenever possible. <a href="https://www.apache.org/licenses/LICENSE-2.0.html#patent">Section 3 of the Apache License, Version 2.0</a> follows the general style:</p>
+    <blockquote>
+      <p><em>Grant of Patent License</em>. Subject to the terms and conditions of this License, each Contributor hereby grants to You a…patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work…</p>
+    </blockquote>
+    <p>Again, many open source licenses use shorter, more general grants of permission. Many of these licenses are so short or general that lawyers aren’t sure whether they grant a patent license at all, or what it covers. For example, the preamble of <a href="https://spdx.org/licenses/BSD-2-Clause">The Two-Clause BSD License</a> reads:</p>
+    <blockquote>
+      <p>Redistribution and use in source and binary forms, with or without modification, are permitted…</p>
+    </blockquote>
+    <p>Permission to “use” software covered by a patent might be a license under that patent. It’s not clear.</p>
+    <p>Ideally, drafters of open source licenses would like to completely override the default rules that allow patent owners to sue users and distributors of open source software. The fact that patenting requires application and approval means there may not be any relevant patents to sue under.</p>
+    <p>Unfortunately, a key legal difference makes a complete override impossible. Independent reinvention of patented technology doesn’t stop an inventor with a patent from suing. If Ivan patents a new search algorithm and six months later Carol comes up with the same approach and uses it in code for a database, Ivan can sue Carol and users of Carol’s software. Even if Carol uses an open source license with a very clear patent license. Even if Carol came up with the algorithm on her own, knowing nothing of Ivan or his patent. Ivan owns the relevant patent. It isn’t Carol’s to gove away—to license for free on open source terms.</p>
+    <p>That’s the opposite of how copyright works. If Ivan writes a limerick and Carol just so happens to come up with the same limerick later, Ivan can’t sue Carol for publishing “his” limerick unless he can prove she copied him, rather than wrote it herself. Because copyright applies to code, a copyright license that properly covers all the material in a project code gets rid of copyright risk for users. But a patent works more like a category or pattern—it does or does not cover specific code. If some piece of code implements, or <em>embodies</em>, a patented invention, the patent owner can sue.</p>
+    <p>Drafters of recent open source licenses have tried to address this problem with <dfn>patent-termination clauses</dfn>. Suing users, distributors, or contributors under a patent triggers these clauses, which end the licenses granted to the patent owner for the software.</p>
+    <p>Lawyers often use <a href="https://www.apache.org/licenses/LICENSE-2.0.html#patent">the last sentence of section 3 of the Apache License, Version 2.0</a> as the canonical example of open source patent termination:</p>
+    <blockquote>
+      <p>If You institute patent litigation…alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.</p>
+    </blockquote>
+    <p>Losing the licenses puts the one suing under a patent at risk of infringement suits if they use or distribute the software. But those with relevant patents may or may not use or distribute any kind of software at all. For patent owners that don’t, including companies that only exist to sue for patent infringement, the termination clause doesn’t have teeth. They don’t need a license for the software to begin with, so they can’t be countersued for infringement.</p>
+    <p>Whenever patents and open source cross, lawyers look very carefully at the language of the relevant patent licenses and any patent-termination clauses. Companies may also look into whether contributors to the project are likely to have or seek patents that may apply, or a competitive reason to apply for some.</p>
+    <p>Lack of clear patent language in the license for software that implements old, patent-free inventions, or software published by contributors who aren’t likely to have or seek patents, may not pose any risk. Conversely, even very clear, predictable patent language may not be enough for software that’s likely covered by patents belonging to a competitor or well-known patent bully. Companies considering whether or not to contribute code to an open source project also scrutinize patent terms, to make sure they understand what patents they’d be licensing and how. This often involves lawyers with roles and responsibilities that create even less familiarity and friendliness to open source than usual.</p>
+    <p>Patents make software law hard, and the anti-defaults of open source make it even harder. If you find yourself staring down the double-barreled shotgun of open source patent law, make no fast moves and get the best advice you can. Not just from lawyers. From engineers who know your company and what’s going on in your industry.</p>
+    <h3 id="contract-law">Contract Law</h3>
+    <p>Contract laws give private citizens and organizations the power to use public courts to enforce agreements, with rules for interpreting terms and deciding who bears what risk when the agreement doesn’t say. The prime directive of contract laws is to hold parties to contracts to the promises they intended when they made their deal.</p>
+    <h4 id="warranties">Warranties</h4>
+    <p>Warranties law is a part of contract law. Warranties are promises about products and services covered by contracts. The archetypal warranty gives the purchaser of a new television the right to a repair, replacement, or refund if it quits working a week after purchase, due to shoddy materials or design.</p>
+    <p>Many warranties are written out, but the law implies some by default, as well. An implied warranty of <dfn>merchantability</dfn> says, essentially, that goods licensed or sold by someone in the business of selling that kind of thing will be up to usual standards, and not shoddy knock-offs. A default warranty of <dfn>fitness for a particular purpose</dfn> says that goods an industry player sells to a customer who isn’t themself in the biz to meet a specific need will do the job. A default warranty of <dfn>noninfringement</dfn> says that using what you’re buying as expected won’t immediately land you in an infringement lawsuit. These defaults are read into a contract, or <dfn>implied</dfn>, unless explicit terms clearly get rid of, or <dfn>disclaim</dfn>, them.</p>
+    <p>Implied warranties from sales-contracts law may or may not apply to terms for open source software, but in some circumstances, they clearly will. The implied warranties would then translate into promises about the quality and functionality of the software. Promises the one giving the software away could get sued for failing to keep.</p>
+    <p>Open source licenses disclaim all warranties, among them implied warranties. Typically the words that do this are set in <code>ALL CAPS</code>, and layer general disclaimer language on top of specific disclaimers of merchantability and fitness, for redundancy. Contract law expects contracts to look like sales, and for those selling to get something in return. Owners of software may indeed get something in return for licensing open source, like patches or interest in other products or services they otherwise wouldn’t. But they don’t receive payment, as they would for proprietary software. Without payment coming in, they don’t want to risk paying out on warranties. Even if the warranties arguably make sense.</p>
+    <h4 id="liability">Liability</h4>
+    <p>The law gives each side of a contract the right to sue the other side for damages when they fail to hold up their end of a bargain. Damages are usually limited to what the court thinks the one at fault could have foreseen when they made their deal. If a software company licenses a badly flawed data backup tool that corrupts a customer’s financial data, the customer might collect the costs of digitizing its records again. If the tool wrecks the control system for the customer’s top secret satellite project, crashing it into a chicken farm, the customer probably can’t get the cost of launching a new satellite, of replacing the chickens, or of the chicken farmer’s anguished grief.</p>
+    <p>In order to collect damages, you have to bring a lawsuit or credibly threaten to bring a strong one and convince the other side to settle. Bringing a lawsuit means filing a document that makes <dfn>claims</dfn>—references to laws you say apply to your situation and entitle you to protection from the court or compensation from someone responsible. Those laws might be the contract laws that say a party has to do what it promised, claims for torts like physical harm, property damage, or fraud, and so on.</p>
+    <p>Commercial software licenses usually set a limit on the total amount of money the one selling the software can owe as damages. Often that <dfn>limit on liability</dfn> is the same as, or a multiple of, what the customer pays for the software. If the limit is high, the seller might buy insurance to help cover.</p>
+    <p>Open source software licenses almost universally limit damages, too—to zero, nothing, nada, the same as contributors get paid. They also exclude all the kinds of legal claims—contract, tort, whatever. Liability under a license agreement makes a lot more sense when the one giving the license gets paid. Giving software away for free and keeping the risk of liability would not make sense for many contributors, especially individuals.</p>
+    <h4 id="formation">Formation</h4>
+    <p>The law requires two sides to take some kind of intentional action to create an enforceable contract. The law usually talks about this process in terms of one side making an offer of terms, and the other side accepting the offer. A contract is born.</p>
+    <p>If Able offers Bob terms for an agreement, and Bob accepts, Able and Bob have a contract. If they intended some of their terms to benefit Candice, as well, Candice may be able enforce the parts of the Able-and-Bob contract that are supposed to benefit her. But Able and Bob can’t make enforceable promises on behalf of Candice without her. If Able wants an enforceable promise from Candice, he needs to make a contract with Candice.</p>
+    <p>If Bob and Candice both contributed to an open source software project, Able will want licenses from both of them to know he’s free to use the code. Lawyers disagree about whether open source licenses are contracts, technically speaking. But they agree that users need everyone with intellectual property in the project to override the troublesome legal defaults. Everyone with copyright in code in the project should give a copyright license. Ideally, everyone with a patent covering the software should give a patent license, too.</p>
+    <p>Open source projects try to accomplish this in a number of ways. Each contributor can independently provide their contributions to the public under an open source license. Some open source licenses try to address contributor licensing directly, as does <a href="https://www.apache.org/licenses/LICENSE-2.0#contributions">section 5 of the Apache License, Version 2.0</a>. Some projects use additional terms, like the <a href="https://developercertificate.org/">Developers Certificate of Origin</a>, to help shore up evidence that everyone makes their contribution under open source terms. Contributors can also sign special-purpose contributor agreements to license intellectual property in their contributions to a single person or entity, like a foundation, which in turn licenses everyone else. Or contributors can assign their rights in contributions to another, who in turn licenses it to others, as with some Free Software Foundation projects. The important point from a users’s point of view is that each contributor creates a written record of overriding the proprietary software defaults, and a written record they can find later, if they’re sued.</p>
+    <p>Tools for all of these approaches tend to pay special attention to who owns the intellectual property that individual contributors create. In typical employment and contractor relationships, copyrights and patent rights in job-related work belong to employers and clients, rather than the coders. That means the employers and clients, not the coders, need to give the licenses, at least some of the time. Because of this, open source foundations looking carefully after project intellectual property usually require contributor agreements or assignments from individual contributors as well as their employers. They don’t want to take in and start distributing code that the contributor didn’t have permission to publish and license.</p>
+    <p>In the proprietary software world, nearly all software comes with a warranty that the seller has all the rights they need to license the customer. With very rare exception, open source licenses never do. That means it’s up to users and distributors, the consumers of open source, to do their own research and come to their own conclusions about risk. As a result, a company may need to look past what open source license a project uses to who has contributed and how the project managed rights in their contributions. Again, the key is whether users can find written records that show everyone relevant overrode the legal defaults.</p>
+    <p>Specifics matter. If the software implements patented inventions, uses an open source license with a clear patent license, received contributor license agreements from patent holding contributors—all good news—but used a form contributor license agreement with no patent language, using that software may put a company at unacceptable patent risk. If programmers contributed code they may have written at work or for a client, without making a certificate or signing a contributor license agreement, they may not have thought about whether the rights were theirs to license. The public records a software project has, like revision control data, are often as important as the license notice in determining whether a project is safe to use.</p>
+    <h3 id="real-world-risk">Real-World Risk</h3>
+    <p>Few private companies match the legal and process rigor of the large, enterprise-focused open source foundations, even for proprietary software they sell for lots of money. At the same time, it’s easy to meet an open source contributor who believes all code pushed to public repositories automatically becomes open source and does nothing in particular about contributions to their own projects. Very, very few open source projects do licensing completely right. But plenty of big, important companies—the best targets for lawsuits—use lots of open source software, under a variety of licenses.</p>
+    <p>Enforcement of license rules is relatively lax in some areas of software, like web application programming. In other areas, like embedded systems, compliance is better ingrained. Some foundations strongly favor enforcing licenses only to gain compliance—getting license notices fixed, getting source code released, getting staff trained to avoid another violation—rather than to collect court judgments for money. On the other hand, companies relying on rules of the open source licenses for software they release for their business models have taken violators to court and got settlements. Outside the courts, naming-and-shaming violators increasingly happens in the open, on the Internet, where it can take a very immediate, serious toll on reputation. Especially for companies that compete to recruit computer programmers who identify with open source.</p>
+    <p>Most lawsuits begin in private, with demand letters, rather than in public, with lawsuit filings in court. But overall, lawsuits in open source seem rare. For individuals and many small companies, there would be little point in suing anyway, since there is no significant money to be won from them. Conversely, community goodwill and reputation remain very valuable for users and creators of open source software alike. More valuable, in many cases, than insisting on their legal rights.</p>
+    <p>That said, the overall picture hides a lot of project- and case-specific variation. It’s not a safe general rule to say that open source license rules don’t matter in practice. Nor does it make sense to pretend that every violation gets punished under the strictest possible reading of the rules. We have to look through the general category of open source to the specific projects, companies, institutions, and people involved in the open source we want to use or contribute to.</p>
+    <h2 id="implementations">Implementations</h2>
+    <p>The phrase “open source” was coined in the late 1990s to rebrand what had been called “free software” for a stronger pitch to the business world. A string of headline-grabbing conversion stories—Netscape’s release of their Mozilla web browser in 1998, a handful of successful IPOs in 1999, IBM’s coming out for the Linux kernel that same year—cemented open source as a business phenom. New interest in open source led to a flurry of new open source licenses, often specific to a single project or company. But over time, the open source community standardized on a few licenses reused for many projects. Reusing a well known license meant one less license for potential users to read and understand.</p>
+    <p>The popular open source license tools can be grouped into a few classes.</p>
+    <h3 id="permissive-licenses">Permissive Licenses</h3>
+    <p><dfn>Permissive</dfn> licenses come with minimal rules. They almost always require attribution: including a copy of the copyright notice and license terms that came with the software with all new copies of the software. They may also impose other obligations, often annoying but procedural chores like listing any changes made to an official version of the software. Conditions satisfied, all are free to use permissively licensed open source software, redistribute it, make changes, and combine with other, even proprietary software in new programs and products.</p>
+    <p>The MIT-style family of licenses, including <a href="https://spdx.org/licenses/MIT">The MIT License</a> and <a href="https://spdx.org/licenses/ISC">ISC License</a>, are permissive licenses, popular in a variety of software communities. Much the same is true of the BSD family of licenses, in <a href="https://spdx.org/licenses/BSD-2-Clause">two-</a> and <a href="https://spdx.org/licenses/BSD-3-Clause">three-clause</a> variants. The Artistic licenses, versions <a href="https://spdx.org/licenses/Artistic-1.0">1.0</a> and <a href="https://spdx.org/licenses/Artistic-2.0">2.0</a>, hail from the Perl programming language community, but apply to a few important projects in other areas, as well. <a href="https://apache.org/licenses/LICENSE-2.0">The Apache License, Version 2.0</a> applies to many Apache Foundation and other projects. The more recent <a href="https://blueoakcouncil.org/license/1.0.0">Blue Oak Model License</a> set a higher bar for approachable, professional drafting in permissive open source licensing.</p>
+    <p>Permissively licensed open source software is often the easiest for companies to approve for use as published, for reuse with changes, and for inclusion in binary or source-obfuscated programs. It’s usually legally straightforward to incorporate permissively licensed open source software into other software, even proprietary software, and to combine it with other open source. With older permissive licenses, like MIT- or BSD-style licenses, there may be stronger concerns about patent risk, since it isn’t clear if or how those licenses cover patent rights.</p>
+    <p><a href="https://blueoakcouncil.org">Blue Oak Council</a> publishes a <a href="https://blueoakcouncil.org/list">reference list of permissive open source software licenses</a>, ranked by quality and legal strength.</p>
+    <h3 id="copyleft-licenses">Copyleft Licenses</h3>
+    <p><dfn>Copyleft</dfn> licenses work like permissive licenses with additional rules. Those additional rules require those who distribute copies of software to provide source code and the same license terms for that code to recipients, for the original code as well as some or all changes, enhancements, and other code combined with the copyleft code. Many in the copyleft licensing community consider these rules necessary to preserve users' abilities to run, understand, and improve software.In other words, they rely on copyleft rules to keep open source open.</p>
+    <p>Copyleft licenses are often compared in the strengths of their rules that require sharing alike. Strong copyleft licenses trigger source code and license terms requirements in more situations, for more code. Those requirements may themselves demand more by way of compliance. Weaker copyleft licenses give clear ways to avoid source and license-terms requirements by separating new code from that of the project, less stringent requirements when copyleft is triggered, or both.</p>
+    <p><a href="https://blueoakcouncil.org">Blue Oak Council</a> publishes a <a href="https://blueoakcouncil.org/copyleft">guide to copyleft licenses</a> that includes <a href="https://blueoakcouncil.org/copyleft#copyleft-families">a list of “families”</a>, clustering copyleft licenses together by strength and approach.</p>
+    <p>Combining open source software with other software and sharing the results usually triggers rules of all the open source licenses involved. Copyleft license rules especially can clash with the rules of other licenses: permissive, copyleft, or proprietary. When combined software triggers more than one set of rules that can’t be satisfied at the same time—such as when the licenses of two copyleft libraries require different sets of terms for the combined program as a whole—that combination prevents distributing the combined software. Licenses that clash this way are called <dfn>incompatible</dfn>.</p>
+    <p>Continuing the example, one or both libraries with conflicting copyleft licenses might <dfn>relicense</dfn>, or change their license terms, to avoid incompatibility. This can be very difficult or impossible to coordinate for projects with many contributors who can’t be reached for agreement to offer the new terms. Some projects have chosen to <dfn>dual license</dfn>—offer a choice of two or more open source licenses—in hopes that users will be able to pick at least one that avoids a compatibility problem with other software. Other projects have adopted variations on standard open source licenses adding <dfn>license exceptions</dfn> that allow their copyleft rules to yield to the copyleft rules of other, more popular copyleft licenses.</p>
+    <p>The best-known copyleft licenses are the GNU General Public Licenses, maintained by the <a href="https://fsf.org">Free Software Foundation</a>, home of the <a href="https://gnu.org">GNU Project</a>. The <a href="https://kernel.org">Linux Kernel</a> uses <a href="https://www.gnu.org/licenses/old-licenses/lgpl-2.0.html">GPL version 2.0</a>. Both GPL version 2.0 and <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL version 3.0</a> apply to a great deal of software frequently used with Linux. Linus Torvalds and the FSF have published clarifications of some of the more vague terms of the GPL for their software.</p>
+    <p>The FSF also maintains the weaker <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">LGPL</a> family of licenses, used for many linked libraries, to require source and licensing only of changes to the library, not programs builds with it. On the other hand, the Affero variants of the GPL, or <a href="http://www.gnu.org/licenses/agpl-3.0.en.html">AGPL</a> licenses, strengthen copyleft to trigger source and license-terms requirements when software is made available to use over a network.</p>
+    <p>The <a href="https://mozilla.org">Mozilla</a> and <a href="https://eclipse.org">Eclipse</a> foundations maintain the <a href="https://www.mozilla.org/en-US/MPL/2.0/">Mozilla Public License</a> and <a href="https://www.eclipse.org/legal/epl-2.0/">Eclipse Public License</a> for the projects they host. These are considered weaker copyleft licenses than the GPL, and use a drafting style more familiar to professional licensing lawyers, akin to that of <a href="https://apache.org/licenses/LICENSE-2.0">The Apache License, Version 2.0</a>.</p>
+    <p>Most companies that use open source software use significant amounts of copyleft software, often with GNU/Linux as a base system. Using copyleft software internally, without changes, can be just as simple as using permissively licensed software. But it’s often a trick to stay within those lines, operationally, over time.</p>
+    <p>When a company needs to make changes to copyleft software, wants to make copyleft software part of its own software or services, or both, license compliance gets more complicated. Whenever possible, companies like to avoid questions about whether their plans will trigger copyleft rules, and what they will have to do to comply. Relatively new, strong-copyleft licenses like Affero GPL breed the most anxiety and confusion. Companies can find and hire both lawyers and compliance professionals familiar with copyleft to help manage copyleft complexity, but prefer to avoid the problem altogether by avoiding code under those terms.</p>
+    <p>Copyleft licenses are harder to comply with, reliably, than permissive licenses. Wise company counsel have reason to scrutinize copyleft code coming into their domains more carefully than permissively licensed code. But much ill-founded fear, uncertainty, and doubt around copyleft—especially about “viral” licenses “infecting” proprietary code—continues to waft off early public relations efforts to scare customers away from open source software competing with proprietary products.</p>
+    <p>Overall, deciding whether to work with copyleft software is neither trivially easy nor impossibly hard. From a typical business point of view, assessing copyleft software is akin to assessing whether to accept a give-and-take deal, while assessing permissive software feels more like deciding whether to accept a free gift. Weighing a give-and-take proposition usually means considering more specifics and long-term goals, but gifts can also be welcome or burdensome.</p>
+    <p>You might like a good deal on pizza delivery better than the generous gift of a puppy dog you’re not keen to care for. A great piece of copyleft software, even with complex copyleft conditions, might work out better for a company than permissively licensed code when all manner of intellectual property, usability, or maintenance issues are considered.</p>
+    <h3 id="applying-licenses-to-code">Applying Licenses to Code</h3>
+    <p>There are all kinds of conventions, traditions, and fashions in how, exactly, open source licenses get applied to code to make it open source. The good news is that they mostly boil down to putting a copy of a license, or mention of a license and where to find its text online, in files next to the code. Whatever method contributors choose to distribute their code—publicly accessible web server directory, hosted revision control repository, published archive—they make sure it comes with an easy-to-find statement, or <dfn>notice</dfn>, of license terms.</p>
+    <p>Probably the most common method is adding a file to the root of a project’s directory with a name like <code>LICENSE</code> or <code>COPYING</code>. A close second is mentioning a license in a header comment at the top of each source file. Some authors also mention licensing in standard documentation files, as at the bottom of <code>README</code>. More recently, package metadata formats—<a href="https://maven.apache.org">Maven</a>’s, <a href="https://rubygems.org">RubyGems</a>’, <a href="https://npmjs.com">npm</a>’s, <a href="https://doc.rust-lang.org/cargo/">Cargo</a>’s—specify a field and format to identify standard open-source license terms, often using a standardized short code of <dfn>identifier</dfn> for a license specified by <a href="https://spdx.org/licenses">SPDX</a>.</p>
+    <p>The good news is that these methods seem to work. There have been relatively few court cases involving open source licenses in the United States, but those we’ve seen have reached decisions on the assumption that the terms in the notice are the terms for the code. The bad news is that, in practice, issues frequently crop up when code under multiple licenses, from different contributors, ends up in the same archive or distribution artifact. It’s often unclear what license from who applies applies to what code. It’s even more common to see code combined in one place without license notices being combined there, too.</p>
+    <p>The Software Package Data eXchange (SPDX) project under the Linux Foundation published a standard for metadata to describe the license terms of software artifacts. This approach differs in allowing consumers, rather than maintainers and distributors, to review code for license information and annotate code with machine-readable metadata. A key motivation for the project is to enable consumers of open code to exchange licensing annotations, reducing duplication of effort. SPDX' metadata standard has been adopted by some large companies, but it remains to be seen whether it will take off industry-wide.</p>
+    <h3 id="contribution-management">Contribution Management</h3>
+    <p>Many open-source contributors believe that sending a patch to an existing open-source project without any mention of licensing gives permission to use their contribution under the same terms that apply to the existing code. This idea, which Richard Fontana calls “inbound=outbound”, is very common. But it is not the law.</p>
+    <p>To date, the lawyer-pleasing approach to contributor licensing has been the Apache Foundation’s layered use of <a href="https:///www.apache.org/licenses/LICENSE-2.0#contributions">a section about contributions in its license form</a> and <a href="https://www.apache.org/licenses/icla.pdf">contributor license agreements between contributors and the Apache Foundation</a>, which in turn licenses the public to use Apache software. For contributors with a company affiliation, Apache also signs <a href="https://www.apache.org/licenses/cla-corporate.pdf">a contributor agreement with the company</a>, covering contributors by company personnel. Other institutional stewards of open-source projects, foundations and private companies, have made do with just individual contributor license agreements.</p>
+    <p>Unfortunately, contributor license agreements are imposing legal documents—almost universally longer and denser than The MIT License or even GPL version 2—especially for contributors starting from the false assumption that no license document from them at all is plenty clear enough. Ensuring that signed contracts precede accepted patches is also a drag, even with bots or scripts to help automate the process. The cost is particularly high for small and relatively informal projects, which can otherwise attract a lot of small commits, rapid fire, for which nobody wants wants to spend more time reading, signing, and filing a contract than making the commits.</p>
+    <p>Shaken by the SCO lawsuits, but unwilling to impose the inconvenience of a centralized CLA service on a sprawling network of contributors, Linux Kernel developers developed the <a href="https://developercertificate.org/">Developer Certificate of Origin</a>. The DCO, a short statement from the coder’s point of view that they’re sure they have all the permission they need to contribute the code they’re offering, isn’t a license, nor is it a guarantee that the contributing coder has the rights they claim. But even when referenced shorthand, via <code>Signed-Off-By</code> tags in Git commit messages, it arguably creates a relevant and permanent written record of attribution and licensing diligence for all contributors. Those kinds of records might have been enough to stave off claims, like those from SCO, that code in the Linux codebase came not from open source contributors, but from their own, copyrighted code. The Eclipse Foundation has since approved this mechanism, in lieu of its prior, Apache-esque contributor license agreements.</p>
+    <p>Finally, a special note on copyright assignments, especially for projects under copyleft licenses. Historically, both some foundations and many private-company stewards required not <em>licenses</em>, but <em>assignments</em> of copyrights in contributions for acceptance into their open-source projects. In general terms, assignments change the ownership of copyrights, while licenses merely give permission under them. Confusingly enough, organizations that required assignments often guaranteed that they would license assigned copyrights right back to the public, including the develop who assigned them to the organization to begin with. As a kind of a middle ground, the Oracle Corporation required assignments of joint ownership in contributions, so both Oracle and the contributor owned their contributions. The Clojure programming language project tweaked that model, <a href="https://clojure.org/community/contributing">adapting Oracle’s form</a>, to require joint ownership of contributions with Rich Hickey, the leader of the project, personally.</p>
+    <p>Assignments work much like contributor license agreements, and sometimes have essentially the same legal effect, due to rights granted back to contributors. But assignments inevitably entail more hassle, since many countries’ laws require notarization or other formalities to assign intellectual property rights by contract. Not to mention they sound scary and unnecessary. If the corporate steward on the other side is more than willing to use open-source software under license, why does it require assignment from contributors to its own projects?</p>
+    <p>Some organizations required assignments just because that was the most they could get, and legal advice was to get as much as possible. In some cases, this produced backlash, which was often deserved for lack of good and transparent communication, if not for the legal substance of the assignment agreements themselves.</p>
+    <p>One early, rational case for assignment was relicensing. If the steward of a project anticipates that they may want to change the license terms for a project in the future, agreements to license contributions under the current license terms mean a whole lot of work hunting down old contributors later. Where there are many contributors, that may not be practically possible. Eventually, drafters of contributor license agreements turned to this problem and built rights to relicense into many forms. Often these forms limit relicensing, so that the steward can’t chose whatever terms—say, proprietary terms—they may like. A choice of licenses approved by named foundations—the Open Source Initiative, Free Software Foundation, Debian, or some combination—is also common.</p>
+    <p>A more lasting argument for assignment is to create a single legal entity with all the relevant rights needed to bring a lawsuit for infringement. For reasons of legal procedure and negotiating leverage, having a single copyright owner makes it much easier to sue someone skirting license conditions for infringement, and compel a settlement. The more license conditions the open-source license you use, and the more meaningful the objectives those conditions aim to achieve, the more valuable centralized ownership becomes. Accordingly, copyleft-focused organizations like the Free Software Foundation and Software Freedom Law Center, both active enforcers of GPL copyleft conditions, routinely require assignments for contributed code. These organizations primarily enforce license conditions to secure compliance—release of source code—but need strong claims that they can sue in court for damages, as leverage.</p>
+    <h2 id="additional-resources">Additional Resources</h2>
+    <h3 id="important-institutions">Important Institutions</h3>
+    <p>You should be aware of a number of important institutions in the open source world. These institutions are important sources of information, decisions. Some host important projects.</p>
+    <p>Many also publish points of view on policy, operational, and legal issues. Often enough, they disagree. You should be aware of these positions and disagreements when they affect licenses or software that interest you. A foundation’s positions often carry extra weight for software projects that the foundation hosts.</p>
+    <ul>
+      <li>
+        <p>The <a href="https://opensource.org">Open Source Initiative</a> promotes the concept of open source, publishes a <a href="https://opensource.org/osd-annotated">definition of open source</a>, and maintains <a href="https://opensource.org/licenses">a list of licenses they have approved as open source</a>.</p>
+      </li>
+      <li>
+        <p>The <a href="https://www.fsf.org">Free Software Foundation</a> promotes the concept of free software, publishes a <a href="https://www.gnu.org/philosophy/free-sw.html.en">definition of free software</a>, maintains the <a href="https://www.gnu.org/licenses/">GPL family of copyleft licenses</a> and related <a href="https://www.fsf.org/licensing/enforcement-principles">enforcement principles</a>, and hosts many software projects.</p>
+      </li>
+      <li>
+        <p>The <a href="https://www.linuxfoundation.org">Linux Foundation</a> hosts the Linux Kernel and other projects, leads several patent-related initiatives, and supports the <a href="https://spdx.org">Software Package Data eXchange licensing metadata standards project</a>. The Linux Foundation also serves as an umbrella organization for other open source foundations.</p>
+      </li>
+      <li>
+        <p>The <a href="https://www.apache.org">Apache Foundation</a>, <a href="https://eclipse.org">Eclipse Foundation</a>, <a href="https://www.mozilla.org">Mozilla Foundation</a>, and other foundations host projects and maintain standard form licenses.</p>
+      </li>
+      <li>
+        <p><a href="https://fsconservancy.org">Software Freedom Conservancy</a> hosts a number of projects</p>
+      </li>
+      <li>
+        <p><a href="https://blueoakcouncil.org">Blue Oak Council</a> publishes free, practical materials about software licenses, including a <a href="https://blueoakcouncil.org/list">list of permissive licenses</a>, <a href="https://blueoakcouncil.org/copyleft">guide to copyleft licenses</a>, and example compliance policies for large and small organizations.</p>
+      </li>
+    </ul>
+    <h3 id="further-reading">Further Reading</h3>
+    <p>The best book on open source for business, with especially strong coverage of copyleft licenses like the GPL, is Heather Meeker’s <em><a href="https://www.amazon.com/dp/1511617772">Open (Source) for Business</a></em>. I recommend it to clients.</p>
+    <p>The best book on open source in the broader context of intellectual property law more generally is Van Lindberg’s <em><a href="https://www.oreilly.com/library/view/intellectual-property-and/9780596517960/">Intellectual Property and Open Source</a></em>. Published in 2008, it’s a bit dated now, especially on patent and trade secret law, where we’ve seen very important legal changes. Van tells me he’s working on a second edition, with update coverage of community as well as legal topics.</p>
+    <p>If you enjoyed this guide, you may enjoy my <a href="https://writing.kemitchell.com">blog</a>. Folks seem to like <a href="https://writing.kemitchell.com/2017/03/29/OSS-Business-Perception-Report.html">my guide to how business views specific licenses</a>, a <a href="https://writing.kemitchell.com/2016/09/21/MIT-License-Line-by-Line.html">line-by-line rundown of The MIT License</a>, and <a href="https://writing.kemitchell.com/2016/05/13/What-Open-Source-Means.html">my thoughts on how the meaning of “open source” is changing</a>. I’ve also published a <a href="https://fieldguide.kemitchell.com">field guide to the major species of intellectual property</a></p>
+    <h2 id="thanks">Thanks</h2>
+    <p>My special thanks to Kunal Marwaha, for proofreading help.</p>
+  </main>
+  <footer role="contentinfo">
+    <p>© <a href="https://kemitchell.com">Kyle E. Mitchell</a></p>
+    <p>Originally published at <a href="https://oss.kemitchell.com">oss.kemitchell.com</a>.</p>
+    <p>Licensed under the terms of the <a href="https://creativecommons.org/licenses/by-nd/4.0/legalcode">Creative Commons Attribution-NoDerivatives 4.0 International License</a>.</p>
+  </footer>
+</body>
 </html>
