@@ -120,7 +120,7 @@
             <a href="#copyright-law">Copyright</a>
           </td>
           <td>Owners can sue for copying work.</td>
-          <td>Owners license to make copies.</td>
+          <td>Owners grant licenses to make copies.</td>
         </tr>
         <tr>
           <td>
@@ -130,7 +130,7 @@
             <a href="#copyright-law">Copyright</a>
           </td>
           <td>Owners can sue for distributing work.</td>
-          <td>Owners license to distribute.</td>
+          <td>Owners grant licenses to distribute.</td>
         </tr>
         <tr>
           <td>
@@ -140,7 +140,7 @@
             <a href="#copyright-law">Copyright</a>
           </td>
           <td>Owners can sue for changing work.</td>
-          <td>Owners license to make changes.</td>
+          <td>Owners grant licenses to make changes.</td>
         </tr>
         <tr>
           <td>
@@ -150,7 +150,7 @@
             <a href="#patent">Patent</a>
           </td>
           <td>Owners can sue for using inventions.</td>
-          <td>Owners license to use.</td>
+          <td>Owners grant licenses to use.</td>
         </tr>
         <tr>
           <td>
@@ -160,7 +160,7 @@
             <a href="#patent">Patent</a>
           </td>
           <td>Owners can sue for making inventions.</td>
-          <td>Owners license to make.</td>
+          <td>Owners grant licenses to make.</td>
         </tr>
         <tr>
           <td>
@@ -170,7 +170,7 @@
             <a href="#patent">Patent</a>
           </td>
           <td>Owners can sue for selling inventions.</td>
-          <td>Owners license to sell.</td>
+          <td>Owners grant licenses to sell.</td>
         </tr>
         <tr>
           <td>
@@ -180,7 +180,7 @@
             <a href="#patent">Patent</a>
           </td>
           <td>Owners can sue for importing inventions.</td>
-          <td>Owners license to import.</td>
+          <td>Owners grant licenses to import.</td>
         </tr>
         <tr>
           <td>
@@ -240,7 +240,7 @@
             <a href="#formation">Formation</a>
           </td>
           <td>Each contributor licenses their part.</td>
-          <td>Same terms, from all contributors.</td>
+          <td>Same terms, from all contributors, to everyone.</td>
         </tr>
       </tbody>
     </table>
@@ -257,8 +257,7 @@
     <blockquote>
       <p><em>Grant of Copyright License</em>. Subject to the terms and conditions of this License, each Contributor hereby grants to You a…copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.</p>
     </blockquote>
-    <p>This is the style most professional licensing lawyers use and expect. Actually, it’s pretty modern by lawyer standards. It’s the style of better proprietary software licenses.</p>
-    <p>Many open source licenses use a less structured style. These licenses give “permission” or say that users “may” do things with the software that would otherwise infringe copyright, without saying “copyright”. For example, the first paragraph of <a href="https://spdx.org/licenses/MIT">The MIT License</a> begins:</p>
+    <p>This style is pretty modern by lawyer standards, and consistent with what most professional licensing lawyers use and expect in proprietary software licenses. But many open source licenses use a less structured style. These licenses give “permission” or say that users “may” do things with the software that would otherwise infringe copyright, without saying “copyright”. For example, the first paragraph of <a href="https://spdx.org/licenses/MIT">The MIT License</a> begins:</p>
     <blockquote>
       <p>Permission is hereby granted…to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software…</p>
     </blockquote>
@@ -280,7 +279,7 @@
     <p>Ideally, drafters of open source licenses would like to completely override the default rules that allow patent owners to sue users and distributors of open source software. The fact that patenting requires application and approval means there may not be any relevant patents to sue under.</p>
     <p>Unfortunately, a key legal difference makes a complete override impossible. Independent reinvention of patented technology doesn’t stop an inventor with a patent from suing. If Ivan patents a new search algorithm and six months later Carol comes up with the same approach and uses it in code for a database, Ivan can sue Carol and users of Carol’s software. Even if Carol uses an open source license with a very clear patent license. Even if Carol came up with the algorithm on her own, knowing nothing of Ivan or his patent. Ivan owns the relevant patent. It isn’t Carol’s to give away—to license for free on open source terms.</p>
     <p>That’s the opposite of how copyright works. If Ivan writes a limerick and Carol just so happens to come up with the same limerick later, Ivan can’t sue Carol for publishing “his” limerick unless he can prove she copied him, rather than wrote it herself. Because copyright applies to code, a copyright license that properly covers all the material in a project code gets rid of copyright risk for users. But a patent works more like a category or pattern—it does or does not cover specific code. If some piece of code implements, or <em>embodies</em>, a patented invention, the patent owner can sue.</p>
-    <p>Drafters of recent open source licenses have tried to address this problem with <dfn>patent-termination clauses</dfn>. Suing users, distributors, or contributors under a patent triggers these clauses, which end the licenses granted to the patent owner for the software.</p>
+    <p>Since the early 2000s, drafters of new open source licenses have tried to address this problem with <dfn>patent-termination clauses</dfn>. Suing users, distributors, or contributors under a patent triggers these clauses, which end the licenses granted to the patent owner for the software.</p>
     <p>Lawyers often use <a href="https://www.apache.org/licenses/LICENSE-2.0.html#patent">the last sentence of section 3 of the Apache License, Version 2.0</a> as the canonical example of open source patent termination:</p>
     <blockquote>
       <p>If You institute patent litigation…alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.</p>
@@ -295,14 +294,14 @@
     <p>Warranties law is a part of contract law. Warranties are promises about products and services covered by contracts. The archetypal warranty gives the purchaser of a new television the right to a repair, replacement, or refund if it quits working a week after purchase, due to shoddy materials or design.</p>
     <p>Many warranties are written out, but the law implies some by default, as well. An implied warranty of <dfn>merchantability</dfn> says, essentially, that goods licensed or sold by someone in the business of selling that kind of thing will be up to usual standards, and not shoddy knock-offs. A default warranty of <dfn>fitness for a particular purpose</dfn> says that goods an industry player sells to a customer who isn’t themself in the biz to meet a specific need will do the job. A default warranty of <dfn>noninfringement</dfn> says that using what you’re buying as expected won’t immediately land you in an infringement lawsuit. These defaults are read into a contract, or <dfn>implied</dfn>, unless explicit terms clearly get rid of, or <dfn>disclaim</dfn>, them.</p>
     <p>Implied warranties from sales-contracts law may or may not apply to terms for open source software, but in some circumstances, they clearly will. The implied warranties would then translate into promises about the quality and functionality of the software. Promises the one giving the software away could get sued for failing to keep.</p>
-    <p>Open source licenses disclaim all warranties, among them implied warranties. Typically the words that do this are set in <code>ALL CAPS</code>, and layer general disclaimer language on top of specific disclaimers of merchantability and fitness, for redundancy. Contract law expects contracts to look like sales, and for those selling to get something in return. Owners of software may indeed get something in return for licensing open source, like patches or interest in other products or services they otherwise wouldn’t. But they don’t receive payment, as they would for proprietary software. Without payment coming in, they don’t want to risk paying out on warranties. Even if the warranties arguably make sense.</p>
+    <p>Open source licenses disclaim all warranties, among them implied warranties. Typically the words that do this are set in <code>ALL CAPS</code>. Their structure is twofold, layering general disclaimer language on top of specific disclaimers of merchantability and fitness, for redundancy. Contract law expects contracts to look like sales, and for those selling to get something in return. Owners of software may indeed get something in return for licensing open source, like patches or interest in other products or services they otherwise wouldn’t. But they don’t receive payment, as they would for proprietary software. Without payment coming in, they don’t want to risk paying out on warranties. Even if the warranties arguably make sense.</p>
     <h4 id="liability">Liability</h4>
     <p>The law gives each side of a contract the right to sue the other side for damages when they fail to hold up their end of a bargain. Damages are usually limited to what the court thinks the one at fault could have foreseen when they made their deal. If a software company licenses a badly flawed data backup tool that corrupts a customer’s financial data, the customer might collect the costs of digitizing its records again. If the tool wrecks the control system for the customer’s top secret satellite project, crashing it into a chicken farm, the customer probably can’t get the cost of launching a new satellite, of replacing the chickens, or of the chicken farmer’s anguished grief.</p>
     <p>In order to collect damages, you have to bring a lawsuit or credibly threaten to bring a strong one and convince the other side to settle. Bringing a lawsuit means filing a document that makes <dfn>claims</dfn>—references to laws you say apply to your situation and entitle you to protection from the court or compensation from someone responsible. Those laws might be the contract laws that say a party has to do what it promised, claims for torts like physical harm, property damage, or fraud, and so on.</p>
     <p>Commercial software licenses usually set a limit on the total amount of money the one selling the software can owe as damages. Often that <dfn>limit on liability</dfn> is the same as, or a multiple of, what the customer pays for the software. If the limit is high, the seller might buy insurance to help cover.</p>
     <p>Open source software licenses almost universally limit damages, too—to zero, nothing, nada, the same as contributors get paid. They also exclude all the kinds of legal claims—contract, tort, whatever. Liability under a license agreement makes a lot more sense when the one giving the license gets paid. Giving software away for free and keeping the risk of liability would not make sense for many contributors, especially individuals.</p>
     <h4 id="formation">Formation</h4>
-    <p>The law requires two sides to take some kind of intentional action to create an enforceable contract. The law usually talks about this process in terms of one side making an offer of terms, and the other side accepting the offer. A contract is born.</p>
+    <p>The law requires two sides to take some kind of intentional action to create an enforceable contract. Lawyers usually talk about this process in terms of one side making an offer of terms, and the other side accepting the offer. A contract is born.</p>
     <p>If Able offers Bob terms for an agreement, and Bob accepts, Able and Bob have a contract. If they intended some of their terms to benefit Candice, as well, Candice may be able enforce the parts of the Able-and-Bob contract that are supposed to benefit her. But Able and Bob can’t make enforceable promises on behalf of Candice without her. If Able wants an enforceable promise from Candice, he needs to make a contract with Candice.</p>
     <p>If Bob and Candice both contributed to an open source software project, Able will want licenses from both of them to know he’s free to use the code. Lawyers disagree about whether open source licenses are contracts, technically speaking. But they agree that users need everyone with intellectual property in the project to override the troublesome legal defaults. Everyone with copyright in code in the project should give a copyright license. Ideally, everyone with a patent covering the software should give a patent license, too.</p>
     <p>Open source projects try to accomplish this in a number of ways. Each contributor can independently provide their contributions to the public under an open source license. Some open source licenses try to address contributor licensing directly, as does <a href="https://www.apache.org/licenses/LICENSE-2.0#contributions">section 5 of the Apache License, Version 2.0</a>. Some projects use additional terms, like the <a href="https://developercertificate.org/">Developers Certificate of Origin</a>, to help shore up evidence that everyone makes their contribution under open source terms. Contributors can also sign special-purpose contributor agreements to license intellectual property in their contributions to a single person or entity, like a foundation, which in turn licenses everyone else. Or contributors can assign their rights in contributions to another, who in turn licenses it to others, as with some Free Software Foundation projects. The important point from a user's point of view is that each contributor creates a written record of overriding the proprietary software defaults, and a written record they can find later, if they’re sued.</p>
@@ -380,7 +379,11 @@
     <p>The best book on open source in the broader context of intellectual property law more generally is Van Lindberg’s <em><a href="https://www.oreilly.com/library/view/intellectual-property-and/9780596517960/">Intellectual Property and Open Source</a></em>. Published in 2008, it’s a bit dated now, especially on patent and trade secret law, where we’ve seen very important legal changes. Van tells me he’s working on a second edition, with update coverage of community as well as legal topics.</p>
     <p>If you enjoyed this guide, you may enjoy my <a href="https://writing.kemitchell.com">blog</a>. Folks seem to like <a href="https://writing.kemitchell.com/2017/03/29/OSS-Business-Perception-Report.html">my guide to how business views specific licenses</a>, a <a href="https://writing.kemitchell.com/2016/09/21/MIT-License-Line-by-Line.html">line-by-line rundown of The MIT License</a>, and <a href="https://writing.kemitchell.com/2016/05/13/What-Open-Source-Means.html">my thoughts on how the meaning of “open source” is changing</a>. I’ve also published a <a href="https://fieldguide.kemitchell.com">field guide to the major species of intellectual property</a></p>
     <h2 id="thanks">Thanks</h2>
-    <p>My special thanks to Kunal Marwaha, for proofreading help.</p>
+    <p>Special thanks to the following folks for feedback and proofreading:</p>
+    <ul>
+      <li>Kunal Marwaha</li>
+      <li>Luis Villa</li>
+    </ul>
   </main>
   <footer role="contentinfo">
     <p>© <a href="https://kemitchell.com">Kyle E. Mitchell</a></p>
